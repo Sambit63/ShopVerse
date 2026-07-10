@@ -1,0 +1,333 @@
+
+// **** This function will add the Google Search Box to the specified targetDiv and also shows the searched location with animated marker and map will be zoomed to that location. **** //
+tmpl.Search.addSearch = function (param) {
+
+	var mapObj = param.map;
+	var targetDiv = param.target;
+	var resultFun = param.callbackFunc;
+		if(appConfigInfo.mapData == 'google'){
+			var resultExtent;
+			var lon=0,lat=0;
+			 var searchBox = new google.maps.places.SearchBox(document.getElementById(targetDiv));
+			var start1 = new google.maps.LatLng(parseFloat(appConfigInfo.extent2),parseFloat(appConfigInfo.extent1));
+			var end1 = new google.maps.LatLng(parseFloat(appConfigInfo.extent4),parseFloat(appConfigInfo.extent3));
+			var defaultBounds = new google.maps.LatLngBounds();
+			defaultBounds.extend(start1);
+			defaultBounds.extend(end1);
+			searchBox.addListener('places_changed', function(){
+				var places = searchBox.getPlaces();						//Commented on 21-11-2019
+				//var places = searchBox.getPlace();	
+				console.log("places::",places);					//Added on 21-11-2019
+				if (places.length == 0){
+					return;
+				}
+				var bounds = new google.maps.LatLngBounds();
+				places.forEach(function(place){
+					console.log("place:",place);
+					var x1,y1,x2,y2,placeLocation;
+					var arry = [];
+					placeLocation = place.geometry.location;
+					placeLocation = placeLocation.toString();
+					placeLocation = placeLocation.slice(1,-2);
+					placeLocation = placeLocation.split(", ");
+					var placeName = place.name;
+					if (place.geometry.viewport){
+						bounds.union(place.geometry.viewport);
+						bounds=bounds.toString();
+						bounds=bounds.slice(2,-2);
+						bounds=bounds.split("), (");
+						x1=parseFloat(bounds[0].split(",")[0]);
+						y1=parseFloat(bounds[0].split(",")[1]);
+						x2=parseFloat(bounds[1].split(",")[0]);  
+						y2=parseFloat(bounds[1].split(",")[1]);
+						var extent =[y1,x1,y2,x2];
+						if(place.types[0] == 'sublocality_level_1' || place.types[0] == 'sublocality_level_2' || place.types[0] == 'sublocality_level_3' ||place.types[0] == 'sublocality_level_4' || place.types[0] == 'sublocality'  || place.types[0] == 'subpremise' || place.types[0] == 'neighborhood' || place.types[0] == 'administrative_area_level_1' || place.types[0] == 'administrative_area_level_2' || place.types[0] == 'administrative_area_level_3' || place.types[0] == 'administrative_area_level_4' || place.types[0] == 'administrative_area_level_5' || place.types[0] == 'colloquial_area' || place.types[0] == 'locality' || place.types[0] == 'political' || place.types[0] == 'country' ){
+							resultExtent = extent;
+						}
+						else{
+							resultExtent = null;
+						}
+						searchBox.setBounds(defaultBounds);
+						console.log("placeLocation:",placeLocation)
+						var rec = {lat: parseFloat(placeLocation[0]), lon:parseFloat(placeLocation[1]), extend:resultExtent};
+						arry.push(rec);
+						console.log(arry);
+						lat = parseFloat(placeLocation[0]);
+						lon = parseFloat(placeLocation[1]);
+						var jsonString = JSON.stringify(arry);
+						console.log("placeLocation:::",lon,lat);
+						if(lat>appConfigInfo.extent2 && lat<appConfigInfo.extent4 && lon>appConfigInfo.extent1 && lon<appConfigInfo.extent3){
+							if(resultFun)
+							{
+							return resultFun(placeLocation[1],placeLocation[0],resultExtent,placeName);
+							}else{
+							return getLatLonDetails(placeLocation[1],placeLocation[0],resultExtent,placeName);
+							}
+	
+						}
+						else{
+							// return getLatLonDetails('','','','');				//Commented this line and added next line for Haryana demo on 26-07-2019
+							if(resultFun)
+							{
+							return resultFun(placeLocation[1],placeLocation[0],resultExtent,placeName);
+							}else{
+							return getLatLonDetails(placeLocation[1],placeLocation[0],resultExtent,placeName);
+							}
+							//alert("Searched Place is Out Of Project Area....");
+						}
+					}
+					else{
+						bounds.extend(place.geometry.location);
+						var ext=null;
+						searchBox.setBounds(bounds);
+						var rec = {lat: parseFloat(placeLocation[0]), lon:parseFloat(placeLocation[1]), extend:ext};
+						arry.push(rec);
+						lat = parseFloat(placeLocation[0]);
+						lon = parseFloat(placeLocation[1]);
+						var jsonString = JSON.stringify(arry);
+						if(lat>appConfigInfo.extent2 && lat<appConfigInfo.extent4 && lon>appConfigInfo.extent1 && lon<appConfigInfo.extent3){
+							return getLatLonDetails(placeLocation[1],placeLocation[0],ext,placeName);
+						}
+						else{
+							return getLatLonDetails('','','','');
+							//alert("Searched Place is Out Of Project Area....");
+						}
+					}
+				});
+			});
+		}
+}
+
+// **** This function will add the Google Search Box on the map and also shows the searched location with animated marker and map will be zoomed to that location. **** //
+
+tmpl.Search.addSearchBox = function(param){
+	var zoomButton,placeLocation = [];
+	var mapObj = param.map;
+	var height = param.height;
+	var width = param.width;
+	var img_url = param.img_url;
+
+	var callbackFunc = param.callbackFunc;
+	var closeCallbackFunc = param.closeCallbackFunc;
+	var clearCallbackFunc = param.clearCallbackFunc;
+	var restriction = param.restriction;
+	var zoom_button = param.zoom_button;
+	var withInFlag = true;
+
+	try {
+		
+		if (mapObj === null || mapObj === undefined) {
+			//console.log('tmpl.Search.addSearchBox : Not a Valid Map Object.');
+			return response = { status: false, businesserrorcode: 'TB_GISSDK_0x001', developererrorcode: 'TD_GISSDK_0x001', message: 'Invalid Map Object..!' };
+		}
+
+		if(img_url=== null || img_url === undefined)
+		{
+			return response = { status: false, businesserrorcode: 'TB_GISSDK_0x001', developererrorcode: 'TD_GISSDK_0x001', message: 'img_url is Not Defind..!' };
+		}
+		
+	} catch (error) {
+		if (error instanceof Error) {
+			return response = { status: false, businesserrorcode: 'TB_GISSDK_0x001', developererrorcode: 'TD_GISSDK_0x001', message: error.message };
+		}
+	}
+
+	if(appConfigInfo.mapLib == 'ol7'){
+		if(appConfigInfo.mapData == 'google'){
+			var resultExtent;
+			var lon=0,lat=0;
+			var searchDiv = document.createElement('div');
+			searchDiv.className = 'search-wrapper';
+			var input = document.createElement('input');
+			input.type = 'text';
+			input.placeholder="Search";
+			input.className = 'controls1';
+			searchDiv.appendChild(input);
+	
+			var resetButton = document.createElement('button');
+			resetButton.className = 'close-icon';
+			if(zoom_button== true){
+				zoomButton = document.createElement('button');
+				zoomButton.className = 'zoom_btn';
+				searchDiv.appendChild(zoomButton);
+			}
+			
+			input.onkeyup = function() {
+				searchDiv.appendChild(resetButton);
+				if(this.value.length == 0){
+				if(clearCallbackFunc != undefined){
+					clearCallbackFunc();
+				}
+				}
+				resetButton.style.visibility = (this.value.length) ? "visible" : "hidden";
+			};
+			resetButton.onclick = function() {
+				placeLocation[0],placeLocation[1] = "";
+				this.style.visibility = "hidden";
+				input.value = "";
+				removeAddSearchMarker(mapObj);
+				input.focus();
+				tmpl.Zoom.toExtent({
+				map : mapObj,
+				extent : [appConfigInfo.extent1, appConfigInfo.extent2, appConfigInfo.extent3, appConfigInfo.extent4]
+			});
+			
+				if(closeCallbackFunc != undefined){
+					closeCallbackFunc();
+				}
+			};
+			var searchControl = new ol.control.Control({
+				element: searchDiv
+			});
+			mapObj.addControl(searchControl);								
+			 var searchBox = new google.maps.places.Autocomplete(input);												
+			 searchBox.setFields(['address_components', 'formatted_address', 'geometry', 'icon', 'name']); 								
+			var start1 = new google.maps.LatLng(parseFloat(appConfigInfo.extent2),parseFloat(appConfigInfo.extent1));
+			var end1 = new google.maps.LatLng(parseFloat(appConfigInfo.extent4),parseFloat(appConfigInfo.extent3));
+			var defaultBounds = new google.maps.LatLngBounds();
+			defaultBounds.extend(start1);
+			defaultBounds.extend(end1);
+			searchBox.setBounds(defaultBounds);
+			searchBox.addListener('place_changed', function(){  								
+				 var places = searchBox.getPlace();								
+				console.log("Place from API ====> ",places);
+				if (places.length == 0){
+					return;
+				}
+				var bounds = new google.maps.LatLngBounds();
+								
+				try{
+				places =[places];
+				places.forEach(function(place){
+					var x1,y1,x2,y2;
+					var arry = [];
+					placeLocation = place.geometry.location;
+					placeLocation = placeLocation.toString();
+					placeLocation = placeLocation.slice(1,-2);
+					placeLocation = placeLocation.split(", ");
+					var placeName = place.name;
+					if (place.geometry.viewport){
+						bounds.union(place.geometry.viewport);
+						bounds=bounds.toString();
+						bounds=bounds.slice(2,-2);
+						bounds=bounds.split("), (");
+						x1=parseFloat((bounds[0].split(","))[0]);
+						y1=parseFloat((bounds[0].split(","))[1]);
+						x2=parseFloat((bounds[1].split(","))[0]);
+						y2=parseFloat((bounds[1].split(","))[1]);
+						var extent = [y1,x1,y2,x2];
+						if(place.address_components[0].types== 'sublocality_level_1' || place.address_components[0].types == 'sublocality_level_2' || place.address_components[0].types == 'sublocality_level_3' ||place.address_components[0].types == 'sublocality_level_4' || place.address_components[0].types == 'sublocality'  || place.address_components[0].types == 'subpremise' || place.address_components[0].types == 'neighborhood' || place.address_components[0].types == 'administrative_area_level_1' || place.address_components[0].types == 'administrative_area_level_2' || place.address_components[0].types == 'administrative_area_level_3' || place.address_components[0].types == 'administrative_area_level_4' || place.address_components[0].types == 'administrative_area_level_5' || place.address_components[0].types == 'colloquial_area' || place.address_components[0].types == 'locality' || place.address_components[0].types == 'political' || place.address_components[0].types == 'country' ){
+							resultExtent = extent;
+						}
+						else{
+							resultExtent = null;
+						}
+						var rec = {lat: parseFloat(placeLocation[0]), lon:parseFloat(placeLocation[1]), extend:resultExtent};
+						arry.push(rec);
+						console.log("Searched Location:",rec);
+						var lat =  parseFloat(placeLocation[0]);
+						var lon =  parseFloat(placeLocation[1]);
+						var jsonString = JSON.stringify(arry);
+						if(restriction == true){
+						if(lat>appConfigInfo.extent2 && lat<appConfigInfo.extent4 && lon>appConfigInfo.extent1 && lon<appConfigInfo.extent3){
+						withInFlag = true;
+						zoomToSearch(mapObj,placeLocation[1],placeLocation[0],resultExtent,placeName,img_url,height,width);
+						if(zoom_button== true){
+							zoomButton.onclick = function() {
+								if(withInFlag == true){
+									if(placeLocation[1] != ""){
+										zoomToSearch(mapObj,placeLocation[1],placeLocation[0],resultExtent,placeName,img_url,height,width);
+									}
+								}
+							};
+						}	
+							if(callbackFunc){
+								var rec = {lat:parseFloat(placeLocation[0]) , lon:parseFloat(placeLocation[1])}
+								callbackFunc(rec);
+							}
+						}
+						else{
+							withInFlag = false;
+							zoomToSearch(mapObj,placeLocation[1],placeLocation[0],resultExtent,placeName,img_url,height,width);		
+							if(callbackFunc){													
+								var rec = {lat:parseFloat(placeLocation[0]) , lon:parseFloat(placeLocation[1])};		
+								callbackFunc(rec);
+							}
+						}
+					}else{
+						zoomToSearch(mapObj,placeLocation[1],placeLocation[0],resultExtent,placeName,img_url,height,width);
+						if(zoom_button== true){
+							zoomButton.onclick = function() {
+								if(withInFlag == true){
+									if(placeLocation[1] != ""){
+										zoomToSearch(mapObj,placeLocation[1],placeLocation[0],resultExtent,placeName,img_url,height,width);
+									}
+								}
+							};
+						}	
+							if(callbackFunc){
+								var rec = {lat:parseFloat(placeLocation[0]) , lon:parseFloat(placeLocation[1])}
+								callbackFunc(rec);
+							}
+					}
+						
+					}
+					else{
+						bounds.extend(place.geometry.location);
+						var ext=null;
+						var lat =  parseFloat(placeLocation[0]);
+						var lon =  parseFloat(placeLocation[1]);
+						var rec = {lat: parseFloat(placeLocation[0]), lon:parseFloat(placeLocation[1]), extend:ext};
+						arry.push(rec);
+						var jsonString = JSON.stringify(arry);
+						if(restriction == true){
+						if(lat>appConfigInfo.extent2 && lat<appConfigInfo.extent4 && lon>appConfigInfo.extent1 && lon<appConfigInfo.extent3){
+							withInFlag = true;
+						zoomToSearch(mapObj,placeLocation[1],placeLocation[0],ext,placeName,img_url,height,width);
+						if(zoom_button== true){
+							zoomButton.onclick = function() {
+								if(withInFlag == true){
+									zoomToSearch(mapObj,placeLocation[1],placeLocation[0],ext,placeName,img_url,height,width);
+								}
+							};
+						}
+						if(callbackFunc){
+								var rec = {status: true,lat:parseFloat(placeLocation[0]) , lon:parseFloat(placeLocation[1])}
+								callbackFunc(rec);
+							}
+						}
+						else{
+							withInFlag = false;
+							if(callbackFunc){
+								var rec = {status: false,lat:'' , lon:''}
+								callbackFunc(rec);
+							}
+						}
+					}else{
+						zoomToSearch(mapObj,placeLocation[1],placeLocation[0],ext,placeName,img_url,height,width);
+						if(zoom_button== true){
+							zoomButton.onclick = function() {
+								if(withInFlag == true){
+									zoomToSearch(mapObj,placeLocation[1],placeLocation[0],ext,placeName,img_url,height,width);
+								}
+							};
+						}
+						if(callbackFunc){
+								var rec = {status: true,lat:parseFloat(placeLocation[0]) , lon:parseFloat(placeLocation[1])}
+								callbackFunc(rec);
+							}
+					}
+					}
+				});	
+				}
+				catch(e){
+					//console.log("Error:"+e);
+					 response = { status: false, businesserrorcode: 'TB_GISSDK_0x008', developererrorcode: 'TD_GISSDK_0x008', message: e.message };
+					
+				}
+	
+			});
+		}
+	}
+return response = { status: true, message: 'Location and Landmark Search Added Successfully..!' };	
+}

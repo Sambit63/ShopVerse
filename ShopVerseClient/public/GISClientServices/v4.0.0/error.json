@@ -1,0 +1,101 @@
+[
+ {
+  "id": 1,
+  "Developer_Error_Code": "TD_GISSDK_0x001",
+  "Business_Erro_ Code": "TB_GISSDK_0x001",
+  "Developer_Error_Message": "400 Bad Request: This error code indicates that the request was not properly formed or contained invalid data or Parameter",
+  "Business_Error_Message": "Bad Request, Parameter Not Valid"
+ },
+ {
+  "id": 2,
+  "Developer_Error_Code": "TD_GISSDK_0x002",
+  "Business_Erro_ Code": "TB_GISSDK_0x002",
+  "Developer_Error_Message": "401 Unauthorized: This error code indicates that the requester is not authenticated or authorized to access the requested resource.",
+  "Business_Error_Message": "Unauthorized"
+ },
+ {
+  "id": 3,
+  "Developer_Error_Code": "TD_GISSDK_0x003",
+  "Business_Erro_ Code": "TB_GISSDK_0x003",
+  "Developer_Error_Message": "403 Forbidden: This error code indicates that the requester is authenticated but does not have sufficient permissions to access the requested resource.",
+  "Business_Error_Message": "Forbidden"
+ },
+ {
+  "id": 4,
+  "Developer_Error_Code": "TD_GISSDK_0x004",
+  "Business_Erro_ Code": "TB_GISSDK_0x004",
+  "Developer_Error_Message": "404 Not Found: This error code indicates that the requested resource was not found on the server.",
+  "Business_Error_Message": "Rwsource  Not Found"
+ },
+ {
+  "id": 5,
+  "Developer_Error_Code": "TD_GISSDK_0x005",
+  "Business_Erro_ Code": "TB_GISSDK_0x005",
+  "Developer_Error_Message": "405 Method Not Allowed: This error code indicates that the HTTP method used in the request is not allowed for the requested resource.",
+  "Business_Error_Message": "Method Not Allowed"
+ },
+ {
+  "id": 6,
+  "Developer_Error_Code": "TD_GISSDK_0x006",
+  "Business_Erro_ Code": "TB_GISSDK_0x006",
+  "Developer_Error_Message": "409 Conflict: This error code indicates that the requested action could not be completed due to a conflict with the current state of the resource.",
+  "Business_Error_Message": "Method conflict"
+ },
+ {
+  "id": 7,
+  "Developer_Error_Code": "TD_GISSDK_0x007",
+  "Business_Erro_ Code": "TB_GISSDK_0x007",
+  "Developer_Error_Message": "500 Internal Server Error: This error code indicates that an unexpected error occurred on the server while processing the request.",
+  "Business_Error_Message": "Internal Server Error : Nginx"
+ },
+ {
+  "id": 8,
+  "Developer_Error_Code": "TD_GISSDK_0x008",
+  "Business_Erro_ Code": "TB_GISSDK_0x008",
+  "Developer_Error_Message": "503 Service Unavailable: This error code indicates that the server is currently unavailable and cannot process the request.",
+  "Business_Error_Message": "Service Unavailable"
+ },
+ {
+  "id": 9,
+  "Developer_Error_Code": "TD_GISSDK_0x009",
+  "Business_Erro_ Code": "TB_GISSDK_0x009",
+  "Developer_Error_Message": "429 Too Many Requests: This error code indicates that the requester has exceeded the allowed rate limit for accessing the requested resource.",
+  "Business_Error_Message": "Too Many Requests"
+ },
+ {
+  "id": 10,
+  "Developer_Error_Code": "TD_GISSDK_0x010",
+  "Business_Erro_ Code": "TB_GISSDK_0x010",
+  "Developer_Error_Message": "201 This error occurs when you try to access a property of an undefined or null object.",
+  "Business_Error_Message": "TypeError: Cannot read property"
+ },
+ {
+  "id": 11,
+  "Developer_Error_Code": "TD_GISSDK_0x011",
+  "Business_Erro_ Code": "TB_GISSDK_0x011",
+  "Developer_Error_Message": "203 Failed to load : This error occurs when an OpenLayers\/Leflet component or external resource fails to load. This could be due to a network issue or a missing or invalid resource URL.",
+  "Business_Error_Message": "Failed to load Map \/ External resource Librarys "
+ },
+ {
+  "id": 12,
+  "Developer_Error_Code": "TD_GISSDK_0x012",
+  "Business_Erro_ Code": "TB_GISSDK_0x012",
+  "Developer_Error_Message": "204 TypeError : This error occurs when you try to use a function or object that is not a constructor.",
+  "Business_Error_Message": "Type Error"
+ },
+ {
+  "id": 13,
+  "Developer_Error_Code": "TD_GISSDK_0x013",
+  "Business_Erro_ Code": "TB_GISSDK_0x013",
+  "Developer_Error_Message": "205 Projection code not found : This error occurs when you try to use a projection that is not defined in your proj4js configuration.",
+  "Business_Error_Message": "Projection code not found in proj4js.defs"
+ },
+ {
+  "id": 14,
+  "Developer_Error_Code": "TD_GISSDK_0x014",
+  "Business_Erro_ Code": "TB_GISSDK_0x014",
+  "Developer_Error_Message": "300 Unsupported geometry type : This error occurs when you try to use a geometry type that is not supported by OpenLayers\/Leflet.",
+  "Business_Error_Message": "Unsupported geometry type"
+ }
+
+]

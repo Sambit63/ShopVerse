@@ -1,0 +1,569 @@
+1.tmpl.Search.getLandMarks(params)
+
+var params = {
+  point: [77.59764627554517, 12.978902092532225], // Replace with actual longitude and latitude values
+  callbackFunc: function(results) {
+    // Define your callback function logic here
+    console.log(results);
+  },
+  POI_type: "hospital", // Replace with the desired POI type
+  dataFrom: "google", // Replace with the desired data source
+  ignoreRadius: true, // Set to true to ignore radius
+  radius: 800000, // Replace with the desired radius value
+  Max_num_POIs: 10, // Replace with the maximum number of POIs you want to retrieve
+};
+
+
+
+
+2.To make AJAX request
+
+function successCallback(res) {
+		console.log( " ::::::: successCallback ::::::: ",res);
+	}
+
+	tmpl.Utils.makeAjaxRequest(
+		{
+			url : appConfigInfo.apiManURL + "/tiotgoogle/" + appConfigInfo.apiManVersion + "/nearbylandmark?location=12.97580746890632%2C%2077.59829000574554&radius=800000&type=hospital&key="+appConfigInfo.googleMapKey,
+			method : "GET",
+			successCallback : successCallback
+		}
+	)
+
+
+  3.tmpl.Search.All 
+
+  var payload = {
+  map: temp1, // Replace with your Map object
+  point: [77.59764627554517, 12.978902092532225],
+  callbackFunc: function(result) {
+    // Handle the result here
+    console.log("Result:", result);
+  }
+};
+
+// Call the tmpl.Search.All function with the payload
+var response = tmpl.Search.All(payload);
+
+
+4.To Create Heatmap
+
+var arrayData =[
+    {
+        "lat": 16.04974,
+        "lon": 79.74054,
+        "eventType": "AAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+        "lat": 18.97463,
+        "lon": 83.66374,
+        "eventType":"BBBBBBBBBBBBBBBBBBBBBB"
+    },
+    {
+        "lat": 16.47288,
+        "lon": 81.83618,
+        "eventType":"BBBBBBBBBBBBBBBBBBBBBB"
+    },
+    {
+      "lat": 14.514183611604484,
+      "lon": 79.62098988752504,
+      "eventType" : "CCCCCCCCCCCCCCCCCCCCCCC"
+    },
+    {
+      "lat": 16.55168579217681,
+      "lon": 80.13734732190801,
+      "eventType" : "AAAAAAAAAAAAAAAAAAAAAAA"
+    }
+  
+]
+
+
+var params = {
+
+map : temp1,
+data : arrayData,
+layer : "Layer Name",
+blur : 10,
+radius : 10
+
+}
+
+
+tmpl.HeatMap.create(params)
+tmpl.HeatMap.createWithTooltip(params)
+
+=============================================================== Track Payload ============================================
+
+const bangaloreVehicle = new tmpl.Track.singleVehicle({
+
+    map: gmap,
+
+    vehicle_img: 'https://tengage.trinityiot.in/fileUpload/siegisadminBydefault_111.png',
+
+    route_color: '#20f727',
+
+    route_width: 5,
+
+    label: 'BangaloreVehicle',
+
+    zoom: 15,
+
+    icon_scale: 0.5,
+
+    features: [
+
+      {
+
+        id: 'BangaloreVehicle',
+
+        lat: 12.9716,
+
+        lon: 77.5946,
+
+        speed: 60, // Speed in km/h
+
+        track_status: true,
+
+        label: 'BangaloreVehicle',
+
+        data: { /* Additional data */ }
+
+      }
+
+    ],
+
+    intermediateTime: 5000, // Time between updates in milliseconds
+
+    img_colour: '#20f727',
+    callbackFunc:function test(params) {
+     console.log('test',params);
+    }
+
+  });
+
+
+const startTrackObj = {
+        position: [79.639,12.9716],
+        time: '2023-12-06 19:29:23',
+        data: [{ lat: 13.9716, lon:79.639}],
+        icon: 'https://tengage.trinityiot.in/fileUpload/siegisadminBydefault_111.png',
+        name: 'BangaloreVehicle',
+        label_color: 'black',
+        label_bgcolor: 'white',
+        route_color: '#20f727',
+        html: "<div class='d-flex p-1 justify-content-center' style='width:25vh'> <div class='veh-badge-head' style='color:" + '#FF0000' + "'><b>" + "VEH" + "</b><b class='mx-2' style='color:black'>(" + 0 + "%)</b></div></div>"
+      };
+bangaloreVehicle.startTrack(startTrackObj);
+
+
+
+
+---------- Draw.Draw  ----- 
+
+tmpl.Draw.draw({
+			map : temp1,
+			type : 'Point',
+      callbackFunc:getDrawFeatureDetails
+		});
+		function getDrawFeatureDetails(coord, feature, wktGeom, value){
+			console.log(' ::::: coord ::::: ',coord)
+      var chanedCoord =  ol.proj.transform(coord, 'EPSG:3857', 'EPSG:4326');
+		} 
+
+
+
+
+  ------- Add Search Box -------
+
+
+  tmpl.Search.addSearchBox({
+			map : temp1,
+			img_url : 'img/Arrow-Down.gif',
+			height : 50,
+			width : 25,
+      zoom_button : true
+		});
+
+
+---- to Zoom to Location ---- -
+
+tmpl.Zoom.toXY({map : temp1,latitude : 26.44400724273045 , longitude :80.32669072039425 })
+
+
+------to Convert the Bbox projection ---- 
+
+var sourceProjection = 'EPSG:3857'; // Web Mercator
+var destinationProjection = 'EPSG:4326'; // WGS84
+
+// Example bbox in Web Mercator (EPSG:3857)
+var bbox3857 = [8788118.016003286, 2984336.705053459, 9257747.11778741, 3209978.812551298];
+
+// Transform the bbox to WGS84 (EPSG:4326)
+var bbox4326 = ol.proj.transformExtent(bbox3857, sourceProjection, destinationProjection);
+
+// Output the result
+console.log('Bounding Box in EPSG:4326:', bbox4326);
+
+
+-------- To Add overlay ------- 
+
+
+var marker_pos = new ol.Overlay({
+			id: 'searchOverlayID',
+			element: container,
+			offset: [-10, -40], //@sh changed for icon gif location
+			positioning: 'center'
+		});
+		mapObj.addOverlay(marker_pos);
+
+--------- To Remove Overlay ---------
+
+
+tmpl.Overlay.removeMarker({ map: mapObj, id: 'searchOverlayID' })
+
+
+
+
+----------- For Add Route -------- 
+
+
+var stops = [
+      {"lat":12.96199,"lon":77.6128},
+      {"lat":12.5462,"lon":77.4199}
+    ];
+    tmpl.Route.getRoute({
+      map : temp1,
+      source : [ 77.5964 , 12.9647 ],
+      destination : [ 76.6394, 12.2958 ],
+      sourceIcon : "img/1.png",
+      destinationIcon : "img/2.png",
+      waypoints : stops,
+      waypointsIcon : "img/3.png",
+	  route_width : 3
+    });
+
+
+---------  To Load the Image URL Dynamically -------- 
+
+img_url = appConfigInfo.mapSDKURL + "api_img/Arrow-Down.gif";
+
+
+
+--------- Geocode API ------------------
+
+function handleReverseGeocode(data){
+			console.log(' :::::: ',data.coordinates.lat());
+            console.log(' :::::: ',data.coordinates.lng());
+		}
+
+
+  tmpl.Geocode.getReverseGeocode({
+			address : "Haroon Building (B), Friends Colony, Kurla West, Kurla, Mumbai, Maharashtra 400070, India",
+			callbackFunc  : handleReverseGeocode
+		});
+
+
+
+    ------------------- Reverse Gecode ------------------
+
+
+
+---- Old Version ----
+
+function handleGeocode(data){
+			console.log(data.address);
+		}
+
+
+
+    tmpl.Geocode.getGeocode({
+			point : [77.604921,12.986063],
+			callbackFunc  : handleGeocode	
+		});
+
+
+    ---- New Version Version ------- 
+
+
+        function handleReverseGeocode(data){
+              console.log(data.address);
+            }
+
+
+        tmpl.Geocode.reverse({
+              point : [77.604921,12.986063],
+              callbackFunc  : handleGeocode	
+            });
+
+
+      --------- Trip -------------------- 
+
+      
+var data4 =
+    [
+      {
+        "img_url": "van.png",
+        "trip_name": "NATH95R2",
+        "date": "2020-01-16",
+        "time": "08:31:32",
+        "datetime": "2023-06-06 08:31:32",
+        "location": "29, Sahastradhara Rd, Doon IT Park, IIE (IT PARK, Govind Vihar, Dehradun, Uttarakhand 248013, India",
+        "lat": 30.35980006713867,
+        "lon": 78.08529663085938,
+        "angle": 0.0,
+        "vehicle_no": "UK07BM3104",
+        "imei": "355172109361665",
+        "vehicle_type": "LOADER",
+        "speed": 0,
+        "id": 182976
+      },
+      {
+        "img_url": "van.png",
+        "trip_name": "NATH95R2",
+        "geom": {
+          "type": "geometry",
+          "value": "0101000020E610000000000080758553408E7571BB0E5C3E40"
+        },
+        "date": "2020-01-16",
+        "time": "08:31:32",
+        "datetime": "2023-06-06 08:31:32",
+        "location": "29, Sahastradhara Rd, Doon IT Park, IIE (IT PARK, Govind Vihar, Dehradun, Uttarakhand 248013, India",
+        "lat": 30.359599795532226,
+        "lon": 78.08529663085938,
+        "angle": 0.0,
+        "vehicle_no": "UK07BM3104",
+        "imei": "355172109361665",
+        "vehicle_type": "LOADER",
+        "speed": 0,
+        "id": 182978
+      },
+      {
+        "img_url": "van.png",
+        "trip_name": "NATH95R2",
+        "geom": {
+          "type": "geometry",
+          "value": "0101000020E61000000000008075855340AA605412FB5B3E40"
+        },
+        "date": "2020-01-16",
+        "time": "08:31:32",
+        "datetime": "2023-06-06 08:31:32",
+        "location": "29, Sahastradhara Rd, Doon IT Park, IIE (IT PARK, Govind Vihar, Dehradun, Uttarakhand 248013, India",
+        "lat": 30.359299798583983,
+        "lon": 78.08529663085938,
+        "angle": 0.0,
+        "vehicle_no": "UK07BM3104",
+        "imei": "355172109361665",
+        "vehicle_type": "LOADER",
+        "speed": 0,
+        "id": 182980
+      }
+    ];
+
+
+
+
+tmpl.Trip.display({
+        map: temp1,
+        data: data4,
+        img_url: appConfigInfo.mapSDKURL + "2.png",	//property.img_url,
+        start_url: appConfigInfo.mapSDKURL + "2.png",
+        end_url: appConfigInfo.mapSDKURL + "2.png",
+        halt_points: false,
+        halt_img: appConfigInfo.mapSDKURL + "2.png",
+        callbackFunc: getTripDetails,
+        routeMouseOverDetails: false,
+        route_color: '#bb0000',
+        returnTableData: false,
+        TableDataCallBack: getTableData,
+        icon_scale: 1,
+        minHalt: 10,
+        directionImgae: appConfigInfo.mapSDKURL + "2.png",
+        tooltipLocation: false,
+        label: 'test'
+      });
+
+ function getTripDetails() { }
+    function getTableData() { }
+    function getOverlayFeatureDetails(a, b, c, d) { console.log(a, b, c, d); }
+
+
+------------------- Clearing the trip ----------------------
+
+tmpl.Trip.clear({ map: map });
+
+
+// For adding animation,badge and view angle
+tmpl.Overlay.create({
+    map: map,
+    layer: 'second',
+    getHoverLabel: true,
+    layerSwitcher: false,
+    trackLayer: false,
+    icon_scale: 1,
+    features: [{
+        id: 1,
+        label: "post",
+        label_color: "#FF00FF",
+        img_url: "2.png",
+        lat: 12.973346976038526,  //12.973346976038526, 77.59043659297859
+        lon: 77.59043659297859,
+        height: 100.05,
+		color:"rgba(255, 0, 0,0.9)",
+		animationRequired:true,
+		isBadgeRequired:true,
+		badgeText:"1/1",
+		isViewVisualRequired:true,
+		viewAngle:90,
+		viewDistance:500
+    }, {
+        id: 2,
+        label: "post",
+        label_color: "#FF00FF",
+        img_url: "2.png",
+        lat: 9.848445802886268, //9.848445802886268, 76.35997374370261
+        lon: 76.35997374370261,
+        height: 150.05,
+		color:"rgba(60, 179, 113,0.9)",
+		animationRequired:true,
+		isBadgeRequired:false,
+		badgeText:"ABC",
+		isViewVisualRequired:false,
+		viewAngle:25,
+		viewDistance:500
+    },
+    {
+        id: 3,
+        label: "post",
+        label_color: "#FF00FF",
+        img_url: "2.png",
+        lat: 9.848806777282729, //9.848806777282729, 76.26947946126135
+        lon: 76.26947946126135,
+        height: 150.05,
+		color:"rgba(255, 165, 0,0.9)",
+		animationRequired:false,
+		isBadgeRequired:true,
+		badgeText:"2/2",
+		isViewVisualRequired:true,
+		viewAngle:25,
+		viewDistance:5000
+    }
+    ]
+});
+
+
+
+
+
+
+
+
+================= track With Line tentative payload =======================
+
+
+var myTrack = new tmpl.Track.trackWithLine({
+    map:temp1,
+    latitude:12.5989,
+    longitude:76.8658
+  })
+
+
+
+  myTrack.startTrack({
+    lat:12.7589,
+    lon:79.5689,
+    time : '20-03-2024',
+    speed : '300',
+    location : 'Mysore'
+});
+
+
+====== 
+
+var myTrack = new tmpl.Track.trackWithLine({
+    map:temp1,
+    vehicle_imgw : appConfigInfo.mapSDKURL + "2.png",
+    route_color : '#00FF00',
+    zoom : 15,
+    icon_scale : 1,
+    features : [{
+        lat: 12.976614382511382, 
+        lon: 77.60010751183351,
+    }],
+    simNo : 'KA 05 MD 8055',
+    workforceUserId: 'PANCER'
+    
+  })
+
+
+    myTrack.startTrack({
+    position: [77.5998634308192, 12.976630064771909],
+        time: '2023-12-06 19:29:23',
+        data: [{ place:'Gundlupete',speed:'35km/hr',simNo:'KA10MP1999'}],
+    });
+
+
+ 77.59936990437265, 12.976656201870599
+ 77.5991633742836 , 12.976562108302494
+ 77.59887369571717, 12.976363466208417
+ 77.59847404658186, 12.976096867354961
+
+=============== To Check the get WMS features ===========
+
+tmpl.Map.addWMSLayer({
+    map:temp1,
+	layerUrl:'http://dial100.kolkatapolice.org:8595/geoserver/kolkatha/wms',
+    layerName:'kolkatha:traffic_guard_boundary',
+    layerTitle:'kolkatha:traffic_guard_boundary'
+});
+
+function handleFeatureInfoUrl(url) {
+  console.log("Feature Info URL:", url);
+  // You might make an AJAX/HTTP request here to fetch and process the feature info
+}
+
+var payload = {
+  map: temp1, // Assuming olMap is your OpenLayers map instance
+  callbackfunc: handleFeatureInfoUrl // The callback function defined above
+};
+
+
+tmpl.Map.getWMSMetaData(payload);
+
+
+
+====================== For Multiple Selection For the Zoom ====================
+
+var selectedPoints = [
+    [77.40496161690672,13.068192128692457],  // Example point 1: New York
+    [77.79222969788259,12.829962874679335],
+[78.04450523610004,13.688952281421448]	// Example point 2: Los Angeles
+];
+ 
+tmpl.Zoom.zoomToSelectedPoints({
+    map: map,
+    points: selectedPoints
+});
+
+
+
+
+====================== For traffic layer Visualization ============
+
+
+For Enabling : 
+tmpl.Google.addTrafficLayer({ map: map,visible:true});
+
+
+For Disabling : 
+tmpl.Google.addTrafficLayer({ map: map,visible:fasle});
+
+
+
+
+
+
+
+
+
+
+

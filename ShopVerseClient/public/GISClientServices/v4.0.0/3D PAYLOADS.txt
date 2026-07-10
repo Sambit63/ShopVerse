@@ -1,0 +1,928 @@
+3D PAYLOADS
+
+
+if map is not loading in the browser even after all configuration, it need to be opened in security disabled browser environment.
+To do this open CMD and run this command-->
+{
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=%LOCALAPPDATA%\Google\chromeTemp
+}
+
+
+Map Creation
+
+a)tmpl.Map.mapCreation({
+        target: 'mapDiv1',
+        callBackFun: function callBackFun(map, res) {
+          gmap = map;
+          console.log("Responce..MapObject & Responce Object", map, res);
+        }
+      });
+
+ 1) tmpl.Zoom.toXY({
+			map : map,
+			latitude : 12.9863857,
+			longitude : 77.6082756
+		});
+		
+		
+2)	tmpl.Zoom.zoom({
+			map : map,
+			zoomLevel : 10
+		});
+		
+		
+3)	tmpl.Draw.draw({
+		map : map,
+		type : 'LineString',
+      callbackFunc:getDrawFeatureDetails
+		});
+		function getDrawFeatureDetails(coord, feature, wktGeom, value){
+			console.log(" ::: coord ",coord );
+		} 
+		
+		
+4)	tmpl.Draw.point({
+	     map : map,
+       callbackFunc : getDrawFeatureDetails 
+    });
+    function getDrawFeatureDetails(coord, feature, wktGeom, value){
+    
+    }
+
+5)tmpl.Draw.line({ 
+      map : map,
+      callbackFunc : getDrawFeatureDetails 
+    });
+	function getDrawFeatureDetails(coord, feature, wktGeom, value){
+			
+		} 
+	
+  
+   
+  6)tmpl.Layer.changeVisibility({
+    map : gmap,
+    layer : 'first1',
+    visible : true
+        });
+		
+ 7)tmpl.Draw.clear({ 
+   map: map 
+
+   });
+   
+ 8)tmpl.Zoom.toXYcustomZoom({ map : map, latitude: 12.456, longitude: 77.5774, zoom : 10 });
+ 
+ 9) var data = [
+    {
+        longitude: 77.6015,
+        latitude: 12.9818,
+        properties: { name: 'Point 1' }
+
+    }
+
+];
+10)    tmpl.Create.point({
+      map:map,
+      features:data,
+      layer:'pointLayer',
+      strokeColor:'rgb(255,0,255)',
+      fillColor:'rgba(255,0,255,0.2)'
+    });
+ 
+ ----------------------------------------------sprint task started-------------------------------------------
+ 
+ 11)
+ 
+ tmpl.Overlay.create({
+    map: map,
+    layer: 'second',
+    getHoverLabel: true,
+    layerSwitcher: false,
+    trackLayer: false,
+    icon_scale: 1,
+    features: [{
+        id: 1,
+        label: "post",
+        label_color: "#FF00FF",
+        img_url: "2.png",
+        lat: 9.99857690671298,  //9.99857690671298, 76.29878935021112
+        lon: 76.29878935021112,
+        height: 100.05
+    }, {
+        id: 2,
+        label: "post",
+        label_color: "#FF00FF",
+        img_url: "2.png",
+        lat: 9.848445802886268, //9.848445802886268, 76.35997374370261
+        lon: 76.35997374370261,
+        height: 150.05
+    },
+    {
+        id: 3,
+        label: "post",
+        label_color: "#FF00FF",
+        img_url: "2.png",
+        lat: 9.848806777282729, //9.848806777282729, 76.26947946126135
+        lon: 76.26947946126135,
+        height: 150.05
+    }
+    ]
+})
+
+
+
+
+----- Or overlay Create 2nd payload
+
+
+
+var sampleJsonData = [
+  {
+    id: 1,
+    lon: 77.5946,
+    lat: 12.9716,
+    img_url: 'https://tengage.trinityiot.in/fileUpload/siegisadminBydefault_111.png',
+    label: 'Sample Label'
+  },
+   {
+    id: 2,
+    lon: 76.6394,
+    lat: 12.2958,
+    img_url: 'https://tengage.trinityiot.in/fileUpload/siegisadminBydefault_111.png',
+    label: 'Sample Label'
+  }
+  
+];
+
+
+
+tmpl.Overlay.create({
+  map: map,
+  features: sampleJsonData,
+  layer: 'SampleLayer',
+  getHoverLabel: true
+});
+
+
+12}
+
+var features= [{
+        id: 1,
+        label: "camera",
+        label_color: "green",
+        img_url: "pole.png",
+        lat: 12.90,  //12.975737235855542, 77.60483157143753
+        lon: 77.30,
+        height: 100.05,
+       category_id : 123
+    }, {
+        id: 2,
+        label: "camera",
+        label_color: "green",
+        img_url: "pole.png",
+        lat: 12.85,  //9.848445802886268, 76.35997374370261
+        lon: 77.25,
+        height: 150.05,
+        category_id : 123
+    },
+    {
+        id: 3,
+        label: "camera",
+        label_color: "green",
+        img_url: "pole.png",
+        lat: 12.80, //9.848806777282729, 76.26947946126135
+        lon: 76.20,
+        height: 150.05,
+        category_id : 123
+    }
+    ];
+tmpl.Overlay.createWithCluster({
+                  map:map,
+                  fillColor:'red',
+                  features: features,
+                  layer: 'layerPole',
+                  layerSwitcher: false,
+                  distance: 50,
+                  radius: 15,
+                  allLayer:true,
+                  clusterImage: "pole.png",
+                  getHoverLabel: false
+                });
+ 
+ 
+ 13)
+ tmpl.Map.addWMSLayer({
+    map:gmap,
+	layerUrl:'http://dial100.kolkatapolice.org:8595/geoserver/kolkatha/wms',
+    layerName:'kolkatha:traffic_guard_boundary',
+    layerTitle:'kolkatha:traffic_guard_boundary'
+})
+
+14)
+tmpl.Layer.remove({
+			map : map,
+			layer : 'kolkatha:traffic_guard_boundary'
+		});
+
+		
+		
+26/10/2023  task completed------------------------------------------
+
+ tmpl.Draw.draw
+ api code changed by adding new code for drawing point
+ 
+ tmpl.Draw.point completed
+ 
+  
+ 
+function getDrawFeatureDetails(result, resources) {
+    console.log("data",result);
+}
+15) tmpl.Geocode.getGeocode({
+	point:[77.1385,13.3545],
+	callbackFunc: getDrawFeatureDetails
+});
+ 
+
+27/10/2023 task -------------------------------------------------------------------------------------------------------------------
+ first call create overlay api and after that call this api first make visible false the layer is removing after that make visible true layer will appear
+16) tmpl.Layer.changeVisibility({
+			map : map,
+			layer : 'second',
+			visible : true
+		});
+		
+		
+		
+
+	
+function getDrawFeatureDetails(coord, feature, wktGeom, value) {
+   console.log("data",wktGeom);
+}
+
+30/10/23-----------------------------------------------------------------------------------------------------------------
+ 17)tmpl.Draw.polygon({
+	map: map,
+	callbackFunc: getDrawFeatureDetails
+});
+
+
+
+
+	function callbackFunc(resETA, wktGeom, route_color, route_id, sourcePoint) {
+    console.log("data",resETA, wktGeom, route_color, route_id, sourcePoint);
+}
+
+
+
+
+31/10/23-------------------------------------------------------------------------------------------------------
+  18) function callbackFunc(resETA, wktGeom, route_color, route_id, sourcePoint) {
+    console.log("data",resETA, wktGeom, route_color, route_id, sourcePoint);
+}
+var stops = [
+      {"lat":12.96199,"lon":77.6128},
+      {"lat":12.9735,"lon":77.6213}
+    ];
+    tmpl.Route.getRoute({
+      map : map,
+      source : [ 78.5964 , 13.9647 ],
+      destination : [ 77.6324, 12.9590 ],
+      sourceIcon : "img/1.png",
+      destinationIcon : "img/2.png",
+      waypoints : stops,
+      waypointsIcon : "img/3.png",
+     route_width : 3,
+        callbackFunc:callbackFunc
+    });  	function callbackFunc(resETA, wktGeom, route_color, route_id, sourcePoint) {
+    console.log("data",resETA, wktGeom, route_color, route_id, sourcePoint);
+}
+
+
+
+
+
+2/11/2023---------------------------------------------------------------------------------------
+
+first need to call tmpl.overlay.create api after that need to call this one
+
+19) tmpl.Layer.remove({
+			map : map,
+			layer : 'second'
+		});
+		
+		
+ first need to call tmpl.overlay.create api after that need to call this one
+		
+20)	tmpl.Zoom.toLayer({
+			map : map,
+			layer : 'second'
+		});
+		
+		needs to check for polgon layer also
+		
+	it is zooming to particualr lat lon values	
+	
+21)	 tmpl.Zoom.toXYcustomZoom({
+      map : map,
+      latitude : 12.3108011,
+      longitude : 76.5532877,
+      zoom : 10
+    });
+
+
+
+		
+		
+3/11/23------------------------------------------------------------------------------------
+		
+22)	tmpl.Zoom.toCenter({
+    map: map,
+    lat: 12.9785884,
+    lon: 77.5963159,
+    zoomLevel: 10
+});
+
+help to supreetha regarding loading the maps 
+then help to vinesh regarding payload for editpoi data
+
+
+23)tmpl.Map.removeWMSLayer({
+map:gmap,
+layerTitle :'kolkatha:traffic_guard_boundary'
+});
+
+
+24)var polyJson = [{
+      "id":"01",
+      "geometry":"POLYGON((77.4700927734375 12.906190219892437,77.4707794189453 12.987162237749473,77.5188446044922 12.989838549012532,77.51060485839844 12.961066692801282,77.51747131347656 12.953705916047227,77.52708435058594 12.94500653581774,77.51815795898438 12.936306851970144,77.50030517578125 12.92426063498786,77.486572265625 12.912883118595701,77.4700927734375 12.906190219892437))",
+      "properties":[{
+        "population":"25"
+      }]
+    }]; 
+    tmpl.Create.polygon({
+      map:map,
+      features:polyJson,
+      layer:'polygonLayer',
+      strokeColor:'rgb(255,0,255)',
+      fillColor:'rgba(255,0,255,0.2)'
+    });
+
+
+
+25)tmpl.Map.switchBaseMaps({
+    map: gmap,
+    id: '1' //1=osm 4=esri, G-map=2,G-satalite=3
+});
+
+
+ 6/11/2023------------------------------------------------------------------------------------------------------------------------
+ 
+ function callbackFunc(params) {
+    console.log("data",params)
+}
+26)tmpl.Create.circle({
+map :map,
+radius :50,
+strokeColor :'green',
+fillColor : 'green',
+callbackFunc : callbackFunc,
+latlon : [12.574,77.4753]
+})
+
+27)tmpl.Map.resize({
+			map : map
+		});
+		
+		
+	28)	tmpl.Map.remove({
+			map : map
+		});
+
+
+7/11/23--------------------------------------------------------------------------------------------------------------------------------
+
+
+29)tmpl.Overlay.addMarker ({
+map :map,
+img_url:'img/1.png',
+height:10,
+width:10,
+id:'first1',
+offset:18,
+point: [77.6033,12.9582],
+heightAboveGround:0
+})
+
+
+30)tmpl.Overlay.removeMarker ({
+ map :map,
+id:'first1'
+})
+
+
+first need to call tmpl.overlay.createWithCluster
+
+tmpl.Layer.clearData({
+ map: map, 
+ layer: "layerPole" 
+ });
+
+
+while clearing a circle first we need to create circle by using below payload
+
+function callbackFunc(params) {
+    console.log("data",params)
+}
+tmpl.Create.circle({
+map :map,
+radius :50,
+strokeColor :'green',
+fillColor : 'green',
+callbackFunc : callbackFunc,
+latlon : [12.574,77.4753]
+})
+
+32)
+tmpl.Layer.clearCircle ({
+map :map,
+})
+
+
+ 33)
+tmpl.Map.addOSMBuildings({ map: map});
+
+
+
+first need to call the tmpl.Overlay.createWithCluster api after that call the featureid
+
+function getSearchMapAssets(clusterPointPos, clusterprop) {
+    console.log("clusterPointPos",clusterPointPos)
+    console.log("clusterprop",clusterprop)
+}
+ 
+ 
+tmpl.Feature.byId({
+      map:map,
+      layer: "layerPole",
+      id: "1",
+      callbackFunc: getSearchMapAssets
+    });
+
+
+-------------------------------------------------------------------------------------
+
+34) 
+tmpl.Map.EnableOrDesableTerrain
+
+to enable terrain->
+
+Cesium.Ion.defaultAccessToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1ZmIwMmI4OS05ZGRkLTRjODUtOWVmMC1mYzVlOWUxY2YxOTQiLCJpZCI6MTc5NzA5LCJpYXQiOjE3MDA1NzgzNzB9.JdHLBqQFuZthNAtHDgTZE6AtVe-o6aF2tcrlALIPeu4"
+tmpl.Map.EnableOrDesableTerrain({
+   map:map,
+   visibility:true
+});
+
+to disable terrain->
+
+Cesium.Ion.defaultAccessToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1ZmIwMmI4OS05ZGRkLTRjODUtOWVmMC1mYzVlOWUxY2YxOTQiLCJpZCI6MTc5NzA5LCJpYXQiOjE3MDA1NzgzNzB9.JdHLBqQFuZthNAtHDgTZE6AtVe-o6aF2tcrlALIPeu4"
+tmpl.Map.EnableOrDesableTerrain({
+   map:map,
+   visibility:false
+});
+------------------------------------
+
+35) tmpl.Map.enableShado      
+
+Cesium.Ion.defaultAccessToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1ZmIwMmI4OS05ZGRkLTRjODUtOWVmMC1mYzVlOWUxY2YxOTQiLCJpZCI6MTc5NzA5LCJpYXQiOjE3MDA1NzgzNzB9.JdHLBqQFuZthNAtHDgTZE6AtVe-o6aF2tcrlALIPeu4"
+tmpl.Map.enableShado({
+map:map
+});
+
+-----------------------------------
+
+36) tmpl.Map.desableShado
+
+tmpl.Map.desableShado({
+map:map
+});
+
+-----------------------------------
+37) tmpl.Map.centerPoint
+
+tmpl.Map.centerPoint({map:map});
+
+-------------------------------------------------------------------------------------
+function callbackFunc(params) {
+    console.log("data",params)
+}
+tmpl.Overlay.addCamFieldOfView({
+	map: gmap,
+	lat: 12.9716,
+	lon: 77.5946,
+	angle: 180, 
+	viewofangle:"Wide-angle view of the city",
+	distance: 100, 
+	callBackFunc: getDrawFeatureDetails 
+})
+
+
+
+-------------------------------- Load Osm buildings From the Cesium --------------
+
+
+
+Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1ZmIwMmI4OS05ZGRkLTRjODUtOWVmMC1mYzVlOWUxY2YxOTQiLCJpZCI6MTc5NzA5LCJpYXQiOjE3MDA1NzgzNzB9.JdHLBqQFuZthNAtHDgTZE6AtVe-o6aF2tcrlALIPeu4';
+
+osmBuildingsTileset = Cesium.createOsmBuildings({
+                style: new Cesium.Cesium3DTileStyle({
+                    color: {
+                        conditions: [
+                            ["${feature['building']} === 'hospital'", "color('#0000FF')"],
+                            ["${feature['building']} === 'school'", "color('#00FF00')"],
+                            ["${feature['building']} === 'stadium'", "color('#ff4000')"],
+                            ["${feature['building']} === 'apartments'", "color('#ff4da6')"],
+                            [true, "color('#ffffff')"]
+                        ]
+                    },
+                    show: {
+                        conditions: [//appConfigInfo.osmCloudBuildings,
+                            // Any building that has this elementId will have `show = false`.
+                            //['${elementId} === 	345935913', false],
+                            ['${elementId} === 	692957113', false],
+                            ['${elementId} ===  345936002', false],
+                            // If a building does not have one of these elementIds, set `show = true`.   	
+                            [true, true]
+                        ]
+                    },
+                })
+            });
+
+map.scene.primitives.add(osmBuildingsTileset);
+
+
+to remove Directly
+
+map.scene.primitives.remove(osmBuildingsTileset1);
+
+
+/////////////////////////////////////cluster update properties//////////////////////////////////////
+
+1 . first0----->
+
+var features= [{
+        id: 1,
+        label: "camera",
+        label_color: "green",
+        img_url: "img/2.png",
+        lat: 12.90,  //12.975737235855542, 77.60483157143753
+        lon: 77.30,
+        height: 100.05,
+       category_id : 123
+    }
+    ];
+tmpl.Overlay.createWithCluster({
+                  map:map,
+                  fillColor:'red',
+                  features: features,
+                  layer: 'layerPole',
+                  layerSwitcher: false,
+                  distance: 50,
+                  radius: 15,
+                  allLayer:true,
+                  clusterImage: "img/2.png",
+                  getHoverLabel: false
+                });	
+	
+
+
+
+2. second -->>
+
+
+tmpl.Zoom.toXYcustomZoom({ map : map, latitude: 12.90, longitude: 77.30, zoom : 10 });
+
+
+3. third  --->  icon change
+
+var properties= {
+        img_url: "img/3.png"
+};
+    
+ 
+    tmpl.Feature.clusterUpdatePropertiesLatLon({
+      map: map,
+      layer: 'layerPole',
+      point: [77.30,12.90],
+      id: 1,
+      properties: properties
+tmpl.Map.mapCreation({
+      target: "mapDiv1",
+      callBackFun: callbackFunc
+    });
+
+-----------------------------------------------------------------------------------
+tmpl.Map.add3DtileSet({
+map:map,
+url:"http://192.168.1.165:8989/trinityAPI/3D_Tilesets/tilesetTest 1.json",
+id :1
+});
+------------------------------------------------------------------
+tmpl.Map.remove3DtileSet({
+map:map,
+id :1
+});
+---------------------------------------------------------------------------------
+
+8/11/23--------------------------------------------------------------------------------
+
+working on test case and sonar report 
+groupserviceimpl class 
+GetHierarchicalColumndataPojo
+GetHierarchicalLayerdataPojo
+GetLayerDataPojo
+fix the test coverage from 75 to 85 
+
+
+9/11/23--------------------------------------------------------------------------------------
+synctenant issue
+
+iotops ge connect agi tenats beku andre we shd call api esb ok na inside applicaton u lll call access token method so access token is getting from ESB that itself is going null means db is damage not getting token so that is the issue tennat is 
+not syncing if that token works means issue is resolved from ESB side then the issue is fixed
+
+
+
+tmpl.Map.add3dTiledMap({
+map:map
+})
+
+
+------------------------------- 
+
+
+
+tilesetTree = new Cesium.Cesium3DTileset({
+    url: "3DTileset/tilesetTest 1.json",
+  })
+
+  map.camera.flyToBoundingSphere(tilesetTree.root.boundingSphere, {
+        maximumHeight: 5,
+    duration: 10,
+    offset: new Cesium.HeadingPitchRange(Cesium.Math.toRadians(65), Cesium.Math.toRadians(-5), 150) // Optional camera offset
+  });
+ 
+
+
+
+------------------ To Load One icon ---------------
+
+appConfigInfo.mapSDKURL + "2.png",
+
+
+----------------- Trip Display --------------------
+
+var data4 =
+    [
+      {
+        "img_url": "van.png",
+        "trip_name": "NATH95R2",
+        "date": "2020-01-16",
+        "time": "08:31:32",
+        "datetime": "2023-06-06 08:31:32",
+        "location": "29, Sahastradhara Rd, Doon IT Park, IIE (IT PARK, Govind Vihar, Dehradun, Uttarakhand 248013, India",
+        "lat": 30.35980006713867,
+        "lon": 78.08529663085938,
+        "angle": 0.0,
+        "vehicle_no": "UK07BM3104",
+        "imei": "355172109361665",
+        "vehicle_type": "LOADER",
+        "speed": 0,
+        "id": 182976
+      },
+      {
+        "img_url": "van.png",
+        "trip_name": "NATH95R2",
+        "geom": {
+          "type": "geometry",
+          "value": "0101000020E610000000000080758553408E7571BB0E5C3E40"
+        },
+        "date": "2020-01-16",
+        "time": "08:31:32",
+        "datetime": "2023-06-06 08:31:32",
+        "location": "29, Sahastradhara Rd, Doon IT Park, IIE (IT PARK, Govind Vihar, Dehradun, Uttarakhand 248013, India",
+        "lat": 30.359599795532226,
+        "lon": 78.08529663085938,
+        "angle": 0.0,
+        "vehicle_no": "UK07BM3104",
+        "imei": "355172109361665",
+        "vehicle_type": "LOADER",
+        "speed": 0,
+        "id": 182978
+      },
+      {
+        "img_url": "van.png",
+        "trip_name": "NATH95R2",
+        "geom": {
+          "type": "geometry",
+          "value": "0101000020E61000000000008075855340AA605412FB5B3E40"
+        },
+        "date": "2020-01-16",
+        "time": "08:31:32",
+        "datetime": "2023-06-06 08:31:32",
+        "location": "29, Sahastradhara Rd, Doon IT Park, IIE (IT PARK, Govind Vihar, Dehradun, Uttarakhand 248013, India",
+        "lat": 30.359299798583983,
+        "lon": 78.08529663085938,
+        "angle": 0.0,
+        "vehicle_no": "UK07BM3104",
+        "imei": "355172109361665",
+        "vehicle_type": "LOADER",
+        "speed": 0,
+        "id": 182980
+      }
+    ];
+
+
+
+
+tmpl.Trip.display({
+        map: temp1,
+        data: data4,
+        img_url: appConfigInfo.mapSDKURL + "2.png",	//property.img_url,
+        start_url: appConfigInfo.mapSDKURL + "2.png",
+        end_url: appConfigInfo.mapSDKURL + "2.png",
+        halt_points: false,
+        halt_img: appConfigInfo.mapSDKURL + "2.png",
+        callbackFunc: getTripDetails,
+        routeMouseOverDetails: false,
+        route_color: '#bb0000',
+        returnTableData: false,
+        TableDataCallBack: getTableData,
+        icon_scale: 1,
+        minHalt: 10,
+        directionImgae: appConfigInfo.mapSDKURL + "2.png",
+        tooltipLocation: false,
+        label: 'test'
+      });
+
+ function getTripDetails() { }
+    function getTableData() { }
+    function getOverlayFeatureDetails(a, b, c, d) { console.log(a, b, c, d); }
+
+
+=============================================================== Track Payload ============================================
+
+const bangaloreVehicle = new tmpl.Track.singleVehicle({
+
+    map: gmap,
+
+    vehicle_img: appConfigInfo.mapSDKURL + "2.png",
+
+    route_color: '#20f727',
+
+    route_width: 5,
+
+    label: 'BangaloreVehicle',
+
+    zoom: 15,
+
+    icon_scale: 0.5,
+
+    features: [
+
+      {
+
+        id: 'BangaloreVehicle',
+
+        lat: 12.9716,
+
+        lon: 77.5946,
+
+        speed: 60, // Speed in km/h
+
+        track_status: true,
+
+        label: 'BangaloreVehicle',
+
+        data: { /* Additional data */ }
+
+      }
+
+    ],
+
+    intermediateTime: 5000, // Time between updates in milliseconds
+
+    img_colour: '#20f727',
+    callbackFunc:function test(params) {
+     console.log('test',params);
+    }
+
+  });
+
+
+const startTrackObj = {
+        position: [79.639,12.9716],
+        time: '2023-12-06 19:29:23',
+        data: [{ lat: 13.9716, lon:79.639}],
+        icon: appConfigInfo.mapSDKURL + "2.png",
+        name: 'BangaloreVehicle',
+        label_color: 'black',
+        label_bgcolor: 'white',
+        route_color: '#20f727',
+        html: "<div class='d-flex p-1 justify-content-center' style='width:25vh'> <div class='veh-badge-head' style='color:" + '#FF0000' + "'><b>" + "VEH" + "</b><b class='mx-2' style='color:black'>(" + 0 + "%)</b></div></div>"
+      };
+bangaloreVehicle.startTrack(startTrackObj);
+
+
+============================================ 
+
+
+We Need to Use Track Without Line
+ 
+tmpl.Overlay.create({
+    map: temp1,
+    layer: 'second',
+    getHoverLabel: true,
+    layerSwitcher: false,
+    trackLayer: true,
+    icon_scale: 1,
+    features: [{
+        id: 1,
+        label: "post",
+        label_color: "#FF00FF",
+        img_url: appConfigInfo.mapSDKURL + "2.png",	//property.img_url,
+        lat: 26.850601673068848,  //12.973346976038526, 77.59043659297859
+        lon: 80.93884402969394,
+        height: 100.05,
+		color:"rgba(255, 0, 0,0.9)",
+		animationRequired:false,
+		isBadgeRequired:false,
+		badgeText:"1/1",
+		isViewVisualRequired:false,
+		viewAngle:90,
+		viewDistance:500
+    },
+        {
+        id: 2,
+        label: "post",
+        label_color: "#FF00FF",
+        img_url: appConfigInfo.mapSDKURL + "2.png",	//property.img_url,
+        lat: 26.450601673068848,  //12.973346976038526, 77.59043659297859
+        lon: 80.43884402969394,
+        height: 100.05,
+		color:"rgba(255, 0, 0,0.9)",
+		animationRequired:false,
+		isBadgeRequired:false,
+		badgeText:"1/1",
+		isViewVisualRequired:false,
+		viewAngle:90,
+		viewDistance:500
+    }
+    ]
+});
+ 
+=========================== Need to Push Data for the Respective Vehicle ID ===============
+ 
+ 
+data=[
+    {
+        "id": 1,
+        "lat": 26.851814,
+        "lon": 80.938145,
+        "layerName": "second",
+        "img_url": appConfigInfo.mapSDKURL+'api_img/2.png',
+        "speed": 21,
+        "placeName": "Ramkrishna Paramhansh Nagar",
+        "vehNo": "CG10AG6359",
+        "vehType": "AUTO TIPPER",
+        "vbadge": "#FFFFFF",
+        "properties": {
+            "html": "<div class='d-flex p-1 justify-content-center' style='width:25vh'> <div class='veh-badge-head' style='color:#330596'><b>CG10AG6359</b><b class='mx-2' style='color:black'>(8%)</b></div></div>"
+        },
+        "label_color": "#E905CA",
+        "label_bgcolor": "#ffffff",
+        "updatedTime": "06-03-2024 15:30:15"
+    },
+      {
+        "id": 2,
+        "lat": 26.851814,
+        "lon": 80.938145,
+        "layerName": "second",
+        "img_url": appConfigInfo.mapSDKURL+'api_img/2.png',
+        "speed": 21,
+        "placeName": "Ramkrishna Paramhansh Nagar",
+        "vehNo": "CG10AG6359",
+        "vehType": "AUTO TIPPER",
+        "vbadge": "#FFFFFF",
+        "properties": {
+            "html": "<div class='d-flex p-1 justify-content-center' style='width:25vh'> <div class='veh-badge-head' style='color:#330596'><b>CG10AG6359</b><b class='mx-2' style='color:black'>(8%)</b></div></div>"
+        },
+        "label_color": "#E905CA",
+        "label_bgcolor": "#ffffff",
+        "updatedTime": "06-03-2024 15:30:15"
+    }
+]
+tmpl.Track.withoutLine({ data: data });
+
+
+
+  

@@ -1,0 +1,49 @@
+Changes need to make in appconfig
+---------------------------------
+
+mapData : "mmi"
+
+extent1 : 80.70779800415038,
+extent2 : 26.952218167823446,  
+extent3 : 81.16029739379883,
+extent4 : 26.763851132264463,
+
+lon : 80.93884402969394,
+lat : 26.850601673068848,
+
+//MMI Map Implimentation for Lucknow Start 
+mmi_clientid : "a2be0ed87a201392fdebf9b853ee3076",
+mmi_clientsecret : "0869f7d066637ac2619937947ea8bd88",
+mmi_tokenurl : "http://10.10.10.194/api/security/oauth/token?grant_type=client_credentials&client_id=",
+mmi_basemap_url : "http://10.10.10.193/getMap?service=WMS&request=GetWMSMap&version=1.1.1&layers=&format=image%2Fpng&transparent=true&datasetNme=",
+//mmi_token_URL : "http://10.10.10.194/api/security/oauth/token?grant_type=client_credentials&client_id=",
+mmi_reversegeocode : "http://10.10.10.194/advancedmaps/v2/",
+mmi_nearbyplaces : "http://10.10.10.194/api/places/search/json?access_token=",
+mmiRoute : "http://10.10.10.194/advancedmaps/v1/",
+mmi_search : "http://10.10.10.194/api/places/search/json",
+baseUrl :'http://10.10.10.193/getMap',
+wmsUrl :'http://10.10.10.193/api/getMap',
+mmi_layers : [
+	{ layers: 'a', styles: 'lko_police_boundary_category_based_label_1696005759056_workview',datasetNme:'lko_police_boundary', test: '0.5756302833565932' },
+	{ layers: 'b', styles: 'lko_police_chowki_1705158106478',datasetNme:'lko_police_chowki', test: '0.5635334227880069', minZoom: 5  },
+	{ layers: 'c', styles: 'lko_bldg_footprint_1705158954938',datasetNme:'lko_bldg_footprint', test: '0.5635334227880069', minZoom: 5  },
+	{ layers: 'd', styles: 'lko_bridge_pol_1705158997573',datasetNme:'lko_bridge_pol', test: '0.07176665643749613', minZoom: 5  },
+	{ layers: 'e', styles: 'lko_bus_sheltors_label_1705159063863',datasetNme:'lko_bus_sheltors', test: '0.01912254419860382', minZoom: 5  },
+	{ layers: 'f', styles: 'lko_bus_terminals_1705159118264',datasetNme:'lko_bus_terminals', test: '0.7210539198359649', minZoom: 5  },
+	{ layers: 'g', styles: 'lko_canal_1705158872634',datasetNme:'lko_canal', test: '0.9918186969957841' },
+	{ layers: 'h', styles: 'lko_health_label_1705159300428',datasetNme:'lko_health',test: '0.0545336345765135', minZoom: 5 },
+	{ layers: 'i', styles: 'lko_lakes_label_1705159333697',datasetNme:'lko_lakes', test: '0.862050792546329' },
+	{ layers: 'j', styles: 'lko_streams_1705159810845',datasetNme:'lko_streams', test: '0.12402535067981302' },
+	{ layers: 'h', styles: 'lko_parkgarden_1705159532980',datasetNme:'lko_parkgarden', test: '0.569063660184574' },
+	{ layers: 'k', styles: 'lko_police_chowki_label_1705159578515',datasetNme:'lko_police_chowki', test: '0.9170828672802582', minZoom: 5  },
+	{ layers: 'l', styles: 'lko_police_stn_1705159614159',datasetNme:'lko_police_stn', test: '0.02047926109989251' },
+	{ layers: 'm', styles: 'lko_ponds_label_1705159649800',datasetNme:'lko_ponds', test: '0.39357144163431657' },
+	{ layers: 'n', styles: 'lko_rd_poly_1705159683485',datasetNme:'lko_rd_poly', test: '0.6946428791472148', minZoom: 10 },
+	{ layers: 'o', styles: 'lko_river_1705158004374',datasetNme:'lko_river', test: '0.9186517289957437' },
+	{ layers: 'p', styles: 'lko_rly_line',datasetNme:'lko_rly_line', test: '0.010787289695188607', minZoom: 10  },
+	{ layers: 'q', styles: 'lko_rly_stn_pt_label_1705159741550',datasetNme:'lko_rly_stn_pt', test: '0.9326853785500631', minZoom: 10 },
+	{ layers: 'r', styles: 'lko_road_divider_1705159785367',datasetNme:'lko_road_divider', test: '0.9902634702285882', minZoom: 10  },
+	{ layers: 's', styles: 'lko_ponds_label_1705159649800',datasetNme:'lko_ponds', test: '0.39357144163431657' }
+	
+  ],
+//MMI Map Implimentation for Lucknow End

@@ -1,0 +1,27 @@
+Changes need to make in appconfig
+
+mapData : "sgl",
+type : 'google',
+
+
+extent1 : 79.02165412902832,
+extent2 : 18.35452552912666,  
+extent3 : 79.25322532653807,
+extent4 : 18.47016582050668,
+
+lat : 18.43773636846085,
+lon : 79.12705422101101,
+
+//SGL Map Implimentation for KarimNagar
+sgl_baseMap:"http://10.200.9.143:1213/cgi-bin/IGiS_Ent_service.exe",
+sgl_access_token:"eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJzZXJ2ZXJfb2JqIjoiOGU3YTZhZDIwMjQ2NzFmYjA0NDAxMDgxNGY5ZTNkNjAuNmU3MTU2ZWY0MjIzOTBhNjY4NDQwNzU4ZWUwZTNhNjkwYTJiZjQxYjUzMmQxNjM0OGQ4YjM4YTk2OGVkZjU5NzBjZjNmNDcyNjNlZmE1YWRlYzQ3YmJlMjM4OTkzZDFkZmFmNDBiZDgyMzNjNTczMTFkNWI5MmVlYzIzMTZmOWEwZDhmY2M2YjBiOTQ4ODIwNGJmMjg0MDg4NTZjZGFmNGUyMDE5NjQ2MDIwOWZhOTU1M2M1ZWZlMjlhZTc1NGM5MmE0ZGMxY2Y1Mzc1OWI5NTJkZWI1ZWNmMDA1ZmViMjU2MjVkMDAzNTg5NGU3MzE2YWYxMDY5MzA1ZjkzZWZjYyIsImlhdCI6MTY4NTYyMzQ5MywiYXVkIjoic2dsOlByb2Zlc3Npb25hbCIsImlzcyI6InNnbC50bGQifQ.J-c2xuqnxlFgjUM6hDQiIunjpbwOcN5LUNKVwe9faTY9ss5npnwrK30PD0CTEop3C2jGxl4JxkjG2usLQdxnOE_RTA6S1Zw60v-v-kKVMmEivsKnwHfx7UbWz2aAG5hD5bZozE_pb6KEtUCqoFgo2Fr5X3UVZ3aVGRjVx2o4WvA",
+sgl_reversegeocode:"http://10.200.9.143:1213/IGISRestAPI/Geocoder/GetAttributeValueFromLayer/landmarks/",
+sgl_geocode:"http://10.200.9.143:1213/IGISRestAPI/Geocoder/GetLocationsFromAttribute/landmarks/type/",
+sgl_transformwk:"http://10.200.9.143:1213/IGISRestAPI/Miscellaneous/TransformWKT",
+sgl_route:"http://10.200.9.143:1213/IGISRestAPI/Network/FindShortestPathMultiRoute?asfile=false",
+sgl_srid:"4326",
+sgl_SridOfGeometry:"4326",
+sgl_OutputSrid:"32644",
+sgl_OutputOptions:"2",
+sgl_NumOfRoute:"1",
+

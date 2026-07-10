@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <script src="C:/Trinity Files/Development/GIS/SVN/RnD_GIS_RV2.3.0_8128/GISClientServices/v4.0.0/appconfig-cesium.js"></script>
+    <!--<script src="http://10.11.10.63:8083/GISClientServies/v4.0.0/appconfig_trip.js"></script>-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>trinityGIS</title>
+  </head>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .mapDiv {
+      /* display: flex; */
+      width: 100%;
+      height: 100vh;
+    }
+
+    .map {
+      height: 100%;
+      width: 100%;
+    }
+
+    #mpps {
+      width: 300px;
+      /* Set the desired width */
+      height: 200px;
+      /* Set the desired height */
+    }
+  </style>
+  <body>
+    <button id="myButton" onclick="cretateOverlay()">Overlay Create</button>
+    <button id="myButton" onclick="addContextMenu()">add ContextMenu on RightClick on Map</button>
+    <button id="myButton" onclick="cretatePolygonLayer()">Create Polygon Layer</button>
+    <button id="myButton" onclick="removePolygonLayer()">Remove Polygon Layer</button>
+    <button id="myButton" onclick="cretateOverlayCluster()">Overlay Create Cluster</button>
+    <button id="myButton" onclick="getPlaceInfo()">get PlaceInfo While click on Map</button>
+    <button id="myButton" onclick="getPlaceInfoRemove()">Remove get PlaceInfo</button>
+    <button id="myButton" onclick="createCircle()">Create Circle Using Lat & Lon</button>
+    <button id="myButton" onclick="removeCircleLayer()">Remove Circle Layer</button>
+    <button id="myButton" onclick="addSearch()">Add Search Box</button>
+    <button id="myButton" onclick="addSearchCustom()">Add Search with Custom Div</button>
+    <button id="myButton" onclick="getReverseGeocode()">getReverseGeocode</button>
+    <button id="myButton" onclick="geocodeinvalid()">get Geocode Invalid</button>
+    <button id="myButton" onclick="geocode()">get Geocode</button>
+    <button id="myButton" onclick="getRoute()">getRoute</button>
+    <button id="myButton" onclick="googleStreet()">Switch GBasemap Street</button>
+    <button id="myButton" onclick="googleSatlite()">Switch GBasemap Satlite</button>
+    <button id="myButton" onclick="osm()">Switch Basemap OSM</button>
+    <button id="myButton" onclick="esri()">Switch Basemap ESRI/Arc GIS</button>
+    <button id="myButton" onclick="sgl()">Switch Basemap SGL</button>
+    <button id="myButton" onclick="addWMS()">To Add WMS Layer</button>
+    <button id="myButton" onclick="removeWMS()">To Remove WMS Layer</button>
+    <button id="myButton" onclick="getMapCenterPoint()">To get Map Center Point</button>
+    
+     <table align="center" width="20%">
+    <tr>
+      <td style="padding-right: 2px">
+        <input type="text" id="addSearch"
+        placeholder="Please enter a search term.." title="Type in a name">
+      </td>
+    </tr>
+    </table>
+    
+    <div id="mapDiv1" class="map"></div>
+      <div id="mapDiv2" class="map2"></div>
+    </div>
+  </body>
+  <script>
+  
+    var gmap = null;
+    var layoutMap = null;
+    var map = null;
+    var lMap = null;
+    appConfigInfo.setResolution = true;
+    // appConfigInfo.mapDimension = "2D";
+    appConfigInfo.mapLib = "ol7";
+    appConfigInfo.type = "google";
+    // appConfigInfo.mapData = "google";
+    appConfigInfo.gwc = false;
+    appConfigInfo.offline = false;
+    
+appConfigInfo.setResolution=true;    
+
+var contextmenuItems = [
+                          {
+                          text: 'Option 1',
+                          classname: 'bold',
+                          callback: test1
+                          },
+                          {
+                          text: 'Option 2',
+                          items: [
+                          {
+                          text: 'Option 2.1',
+                          callback: test2
+                          },
+                          {
+                          text: 'Option 2.2',
+                          callback: test3
+                          }
+                          ]
+                          },
+                          {
+                          text: 'Option 3',
+                          callback: test4
+                          }
+                          ];
+
+
+                      function test1(obj){
+                      console.log(" 1 >>> ", obj);
+                      }
+
+                      function test2(obj){
+                      console.log(" 2 >>> ", obj);
+                      }
+
+                      function test3(obj){
+                      console.log(" 3 >>> ", obj);
+                      }
+
+                      function test4(obj){
+                      console.log(" 4 >>> ", obj);
+                      }
+
+
+    function map1() {
+
+      map = tmpl.Map.mapCreation({
+        target: 'mapDiv1',
+        callBackFun: function callBackFun(map, res) {
+          gmap = map;
+          console.log("Responce..MapObject & Responce Object", map, res);
+        }
+      });
+      console.log("Map Creation : ", map);
+      
+      
+      /*lMap = tmpl.Map.addFloorMap({
+        target: 'mapDiv2',
+        url:'layout.jpg',
+        callBackFun: function callBackFun(map, res) {
+          layoutMap = map;
+          console.log("Layout Responce..MapObject & Responce Object", map, res);
+        }
+      });*/
+      console.log("Lay Out Map Creation : ", lMap);
+      
+
+    }
+
+    function getOverlayFeatureDetails(a, b, c, d,e) {
+      console.log(a, b, c, d,e);
+      var html = 'Name:'+ d.label;
+      tmpl.Tooltip.add({
+        map: gmap,
+        html: html,
+        coordinate: b,
+        id: d.id,
+        offset: [0, -10]
+      });
+    }
+    setTimeout(() => {
+      map1();
+    }, 2000);
+    
+    
+ function addContextMenu(){
+ 
+           tmpl.ContextMenu.create({
+                          map: gmap,
+                          menu_items: contextmenuItems
+                          })
+ }   
+
+function getMapCenterPoint()
+{
+var data = tmpl.Map.centerPoint({map:gmap});
+console.log("tmpl.Map.centerPoint:",data);
+
+}
+function addWMS(){
+
+tmpl.Map.addWMSLayer({map:gmap,layerUrl:'http://dial100.kolkatapolice.org:8595/geoserver/kolkatha/wms',layerName:'kolkatha:traffic_guard_boundary',layerTitle:'kolkatha:traffic_guard_boundary'})
+
+}
+
+function removeWMS(){
+
+tmpl.Layer.remove({ map: gmap, layer: "kolkatha:traffic_guard_boundary" });
+
+}
+
+function removeCircleLayer(){
+
+tmpl.Layer.remove({ map: gmap, layer: 'circleLayer' });
+
+
+}
+
+function createCircle(){
+
+var circle = tmpl.Create.circle({
+      map: gmap,
+      latlon: [12.977380907035116, 77.59486890307845],
+      radius: 2000,
+      strokeColor: 'rgba(255, 0, 0, 0.2)',
+      fillColor: 'rgba(255, 0, 0, 0.1)',
+      callbackFunc: function getCircleCallback(a,b,c,d){console.log(a,b,c,d)}
+    });
+ console.log("Circle Created-- ",circle);   
+    
+}
+
+function getPlaceInfo(){
+
+tmpl.Info.getPlace({
+			map : gmap,
+			callbackFunc : function handleGetPlace(data){
+            console.log(data);
+            alert(data.place+'\n'+data.latitude+','+data.longitude)
+            }
+		});
+        
+}
+
+function getPlaceInfoRemove(){
+
+tmpl.Info.removeGetPlace();
+        
+}
+
+function removePolygonLayer()
+{
+tmpl.Layer.remove({ map: gmap, layer: 'polygonLayer' });
+}
+
+function cretatePolygonLayer(){
+
+tmpl.Create.polygon({
+                    map: gmap,
+                    layer : "polygonLayer",
+                    features: [{
+                    "id":"01",
+                    "geometry":"POLYGON((77.4700927734375 12.906190219892437,77.4707794189453 12.987162237749473,77.5188446044922 12.989838549012532,77.51060485839844 12.961066692801282,77.51747131347656 12.953705916047227,77.52708435058594 12.94500653581774,77.51815795898438 12.936306851970144,77.50030517578125 12.92426063498786,77.486572265625 12.912883118595701,77.4700927734375 12.906190219892437))",
+                    "properties":[{
+                    "population":"25"
+                    }]
+                    },
+                    {
+                    "id":"02",
+                    "geometry":"POLYGON ((77.57044860784957052 12.99298233554822879, 77.57498713706037563 12.9876123029012529, 77.58654958052598261 12.99403526950980137, 77.58352389438546481 12.99772050321009154, 77.57239369179706046 13.00098452165460827, 77.57044860784957052 12.99298233554822879))",
+                    "properties":[{
+                    "population":"24"
+                    }]
+                    },
+                    {
+                    "id":"03",
+                    "geometry":"POLYGON ((77.59541051850902704 12.99403526950980137, 77.60556817912369354 12.984242811379481, 77.60751326307115505 12.99171880890081887, 77.60297473386033573 12.99740462817941378, 77.59541051850902704 12.99403526950980137))",
+                    "properties":[{
+                    "population":"20"
+                    }]
+                    }],
+                    strokeColor:'rgb(255,0,255)',
+                    fillColor:'rgba(152,2,255,0.2)',
+                    lineDash: true,
+                    borderWidth: 2 //Optional
+                    });
+
+}
+
+
+    function cretateOverlay() {
+      var overlay = tmpl.Overlay.create({
+        map: gmap,
+        layer: 'second',
+        trackLayer: false,
+        features: [{
+          id: 1,
+          label: "post1",
+          label_color: "#FF00FF",
+          img_url: "https://tengage.trinityiot.in/fileUpload/siegisadminBydefault_111.png",
+          lat: 30.323241384659934,
+          lon: 78.0329241830895
+        }, {
+          id: 2,
+          label: "post2",
+          label_color: "#FF00FF",
+          img_url: "https://tengage.trinityiot.in/fileUpload/siegisadminBydefault_111.png",
+          lat: 30.336128061576968,
+          lon: 78.05586555298578,
+        }, {
+          id: 3,
+          label: "post3",
+          label_color: "#FF00FF",
+          img_url: "https://tengage.trinityiot.in/fileUpload/siegisadminBydefault_111.png",
+          lat: 30.3046941669445,
+          lon: 78.00524887972254,
+        }]
+      })
+      console.log("tmpl.Overlay.create:",overlay);
+    }
+    
+    
+     function cretateOverlayCluster() {
+      var overlay = tmpl.Overlay.createWithCluster({
+        map: gmap,
+        countTextColor : '#000000',
+        layer: 'second',
+        radius:20,
+        distance:20,
+        fillColor:"#00000",
+        showLabel:true,
+        features: [{
+          id: 1,
+          label: "post1",
+          label_color: "#000000",
+          label_bgcolor: "#ffffff",
+          img_url: "https://tengage.trinityiot.in/fileUpload/siegisadminBydefault_111.png",
+          lat: 30.323241384659934,
+          lon: 78.0329241830895
+        }, {
+          id: 2,
+          label: "post2",
+          label_color: "#FF00FF",
+          label_bgcolor: "#ffffff",
+          img_url: "https://tengage.trinityiot.in/fileUpload/siegisadminBydefault_111.png",
+          lat: 30.336128061576968,
+          lon: 78.05586555298578,
+        }, {
+          id: 3,
+          label: "post3",
+             label_color: "#000000",
+          label_bgcolor: "#ffffff",
+          img_url: "https://tengage.trinityiot.in/fileUpload/siegisadminBydefault_111.png",
+          lat: 30.3046941669445,
+          lon: 78.00524887972254,
+        },
+        {
+          id: 4,
+          label: "post4",
+             label_color: "#000000",
+          label_bgcolor: "#ffffff",
+          img_url: "https://tengage.trinityiot.in/fileUpload/siegisadminBydefault_111.png",
+          lat: 30.3046941669445,
+          lon: 78.00524887972254,
+        },
+        {
+          id: 5,
+          label: "post5",
+             label_color: "#000000",
+          label_bgcolor: "#ffffff",
+          img_url: "https://tengage.trinityiot.in/fileUpload/siegisadminBydefault_111.png",
+          lat: 30.3046941669445,
+          lon: 78.00524887972254,
+        }
+      
+      ]
+
+      })
+      console.log("tmpl.Overlay.create:",overlay);
+    }
+
+    function addSearch() {
+      var search = tmpl.Search.addSearchBox({
+        map: gmap,
+        img_url: 'img/Arrow-Down.gif',
+        height: 50,
+        width: 25,
+        zoom_button: true
+      });
+      console.log("Add Search..", search);
+    }
+    
+    function addSearchCustom(){
+    
+    tmpl.Search.addSearch({
+			map : gmap,
+			target : 'addSearch',callbackFunc : function callbackFunc(a,b,c,d){
+            console.log(a,b,c,d);
+            alert(a,b +'\n'+ d); 
+            }
+		});
+        
+      
+    
+    }
+    
+
+    function handleGeocode(data) {
+      console.log("getGeocode..", data);
+    }
+
+    function geocodeinvalid() {
+      var data = tmpl.Geocode.getGeocode({
+        point: null,
+        callbackFunc: handleGeocode
+      });
+      console.log("Get Geocode..", data);
+    }
+
+    function geocode() {
+      var data1 = tmpl.Geocode.getGeocode({
+        point: [77.604921, 12.986063],
+        callbackFunc: handleGeocode
+      });
+      console.log("Get Geocode..", data1);
+    }
+
+    function handleReverseGeocode(data) {
+      console.log(data);
+    }
+
+    function getReverseGeocode() {
+      var revG = tmpl.Geocode.getReverseGeocode({
+        address: "Mumbai",
+        callbackFunc: handleReverseGeocode
+      });
+      console.log("getReverseGeocode...", revG);
+    }
+
+    function routecallbackFunc(a) {
+      console.log("getRoute..", a);
+    }
+
+    function getRoute() {
+      var stops = [{
+        "lat": 30.3155866008424,
+        "lon": 78.03753974221634
+      }, {
+        "lat": 30.318328001020628,
+        "lon": 78.050278578498
+      }];
+      tmpl.Route.getRoute({
+        map: gmap,
+        source: [78.02902312645865, 30.317455745647262],
+        destination: [78.04226718570898, 30.324776219473645],
+        sourceIcon: "1.png",
+        destinationIcon: "2.png",
+        waypoints: stops,
+        waypointsIcon: "1.png",
+        route_width: 5,
+        callbackFunc: routecallbackFunc
+      });
+    }
+
+    function googleStreet() {
+      var gs1 = tmpl.Map.switchBaseMaps({
+        map: gmap,
+        id: 2
+      });
+      console.log(gs1);
+    }
+
+    function googleSatlite() {
+      var gs = tmpl.Map.switchBaseMaps({
+        map: gmap,
+        id: 3
+      });
+      console.log(gs);
+    }
+
+    function osm() {
+      var gs2 = tmpl.Map.switchBaseMaps({
+        map: gmap,
+        id: 1
+      });
+      console.log(gs2);
+    }
+    
+       function sgl() {
+      var gs2 = tmpl.Map.switchBaseMaps({
+        map: gmap,
+        id: 9
+      });
+      console.log(gs2);
+    }
+
+    function esri() {
+      var gs2 = tmpl.Map.switchBaseMaps({
+        map: gmap,
+        id: 4
+      });
+      console.log(gs2);
+    }
+  </script>
+</html>

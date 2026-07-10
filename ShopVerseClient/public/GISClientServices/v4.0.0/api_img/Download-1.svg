@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.206" height="22.53" viewBox="0 0 20.206 22.53">
+  <g id="Group_22653" data-name="Group 22653" transform="translate(0.5)">
+    <path id="Path_7579" data-name="Path 7579" d="M-1542.452,4057.876v5.941h19.206v-5.941" transform="translate(1542.452 -4041.787)" fill="none" stroke="#bfbfbf" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <g id="Group_22531" data-name="Group 22531" transform="translate(5.006 0)">
+      <path id="Path_7580" data-name="Path 7580" d="M19.533,19.98v11.6" transform="translate(-14.28 -19.98)" fill="none" stroke="#bfbfbf" stroke-width="1"/>
+      <g id="Polygon_1" data-name="Polygon 1" transform="translate(10.506 18.583) rotate(180)" fill="#bfbfbf">
+        <path d="M 9.622493743896484 8.254422187805176 L 0.8830989599227905 8.254422187805176 L 5.252796173095703 0.9717990756034851 L 9.622493743896484 8.254422187805176 Z" stroke="none"/>
+        <path d="M 5.252796173095703 1.94362211227417 L 1.766218185424805 7.754422664642334 L 8.739374160766602 7.754422664642334 L 5.252796173095703 1.94362211227417 M 5.252796173095703 2.86102294921875e-06 L 10.50559616088867 8.754422187805176 L -3.814697265625e-06 8.754422187805176 L 5.252796173095703 2.86102294921875e-06 Z" stroke="none" fill="#bfbfbf"/>
+      </g>
+    </g>
+  </g>
+</svg>
