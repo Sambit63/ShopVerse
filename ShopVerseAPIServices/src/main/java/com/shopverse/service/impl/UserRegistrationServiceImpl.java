@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -70,10 +69,18 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new BadCredentialsException("Invalid email or password");
         }
-        
+
         String token = jwtService.generateToken(user.getEmail());
 
-        return new UserLoginResponse(token);
+
+        return new UserLoginResponse(
+                token,
+                "Login successful",
+                user.getId(),
+                user.getFirstName(),
+                user.getEmail(),
+                user.getRole()
+        );
     }
 
 }

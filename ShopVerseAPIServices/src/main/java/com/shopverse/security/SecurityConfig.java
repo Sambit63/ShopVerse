@@ -20,74 +20,63 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired
-    private AdminUserDetailsService adminUserDetailsService;
+	@Autowired
+	private AdminUserDetailsService adminUserDetailsService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    
-    @Autowired
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-    @Bean
-    UserDetailsService userDetailsService() {
-        return adminUserDetailsService;
-    }
+	@Autowired
+	private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    @Bean
-    AuthenticationManager authenticationManager(
-            AuthenticationConfiguration configuration) throws Exception {
+	@Bean
+	UserDetailsService userDetailsService() {
+		return adminUserDetailsService;
+	}
 
-        return configuration.getAuthenticationManager();
-    }
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		return configuration.getAuthenticationManager();
+	}
 
-        http
+	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-                .csrf(csrf -> csrf.disable())
+		http
 
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.cors(cors -> {
+				}).csrf(csrf -> csrf.disable())
 
-                .authenticationProvider(authenticationProvider())
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                .authorizeHttpRequests(auth -> auth
+				.authenticationProvider(authenticationProvider())
 
-                	    .requestMatchers(
-                	            "/api/admin/register",
-                	            "/api/admin/login",
-                	            "/user/register",
-                	            "/user/login"
-                	    ).permitAll()
+				.authorizeHttpRequests(auth -> auth
 
-                	    .requestMatchers("/api/admin/**")
-                	    .hasRole("ADMIN")
+						.requestMatchers("/api/admin/register", "/api/admin/login", "/user/register", "/user/login")
+						.permitAll()
 
-                	    .requestMatchers("/user/**")
-                	    .hasRole("USER")
+						.requestMatchers("/api/admin/**").hasRole("ADMIN")
 
-                	    .anyRequest()
-                	    .authenticated()
-                	);
+						.requestMatchers("/user/**").hasRole("USER")
 
-        http.addFilterBefore(
-                jwtAuthenticationFilter,
-                UsernamePasswordAuthenticationFilter.class);
+						.anyRequest().authenticated());
 
-        return http.build();
-    }
-    @Bean
-    public org.springframework.security.authentication.dao.DaoAuthenticationProvider authenticationProvider() {
+		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
-        org.springframework.security.authentication.dao.DaoAuthenticationProvider provider =
-                new org.springframework.security.authentication.dao.DaoAuthenticationProvider();
+		return http.build();
+	}
 
-        provider.setUserDetailsService(adminUserDetailsService);
-        provider.setPasswordEncoder(passwordEncoder);
+	@Bean
+	public org.springframework.security.authentication.dao.DaoAuthenticationProvider authenticationProvider() {
 
-        return provider;
-    }
+		org.springframework.security.authentication.dao.DaoAuthenticationProvider provider = new org.springframework.security.authentication.dao.DaoAuthenticationProvider();
+
+		provider.setUserDetailsService(adminUserDetailsService);
+		provider.setPasswordEncoder(passwordEncoder);
+
+		return provider;
+	}
 
 }

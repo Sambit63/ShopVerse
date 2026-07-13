@@ -1,0 +1,395 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.login-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(5px);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+}
+
+.login-modal{
+
+    width:430px;
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:35px;
+
+    position:relative;
+
+    animation:popup .35s ease;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+
+}
+
+@keyframes popup{
+
+    from{
+        transform:translateY(-40px) scale(.9);
+        opacity:0;
+    }
+
+    to{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+
+}
+
+.close-btn{
+
+    position:absolute;
+
+    top:18px;
+
+    right:18px;
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#f2f2f2;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+.close-btn:hover{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+.login-header{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.login-header h1{
+
+    color:#2563eb;
+
+    font-size:34px;
+
+    margin-bottom:10px;
+
+}
+
+.login-header h2{
+
+    font-size:28px;
+
+    color:#222;
+
+    margin-bottom:10px;
+
+}
+
+.login-header p{
+
+    color:#777;
+
+    font-size:15px;
+
+}
+
+.input-group{
+
+    display:flex;
+
+    align-items:center;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    padding:0 15px;
+
+    margin-bottom:20px;
+
+    transition:.3s;
+
+}
+
+.input-group:focus-within{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 10px rgba(37,99,235,.15);
+
+}
+
+.input-icon{
+
+    color:#888;
+
+    margin-right:10px;
+
+}
+
+.input-group input{
+
+    flex:1;
+
+    padding:15px 0;
+
+    border:none;
+
+    outline:none;
+
+    font-size:15px;
+
+}
+
+.password-toggle{
+
+    cursor:pointer;
+
+    color:#777;
+
+}
+
+.login-options{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-size:14px;
+
+    margin-bottom:25px;
+
+}
+
+.login-options label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+.login-options a{
+
+    text-decoration:none;
+
+    color:#2563eb;
+
+}
+
+.login-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.login-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+.divider{
+
+    text-align:center;
+
+    margin:28px 0;
+
+    position:relative;
+
+}
+
+.divider::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:100%;
+
+    height:1px;
+
+    background:#ddd;
+
+    top:50%;
+
+    left:0;
+
+}
+
+.divider span{
+
+    position:relative;
+
+    background:#fff;
+
+    padding:0 15px;
+
+    color:#888;
+
+}
+
+.google-btn{
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    background:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+.google-btn:hover{
+
+    background:#f7f7f7;
+
+}
+
+.register-text{
+
+    text-align:center;
+
+    margin-top:28px;
+
+    color:#555;
+
+}
+
+.register-text span{
+
+    color:#2563eb;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+}
+
+.register-text span:hover{
+
+    text-decoration:underline;
+
+}
+
+@media(max-width:500px){
+
+.login-modal{
+
+    width:95%;
+
+    padding:25px;
+
+}
+
+.login-header h1{
+
+    font-size:28px;
+
+}
+
+.login-header h2{
+
+    font-size:24px;
+
+}
+
+}
+.login-button {
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.login-button:hover {
+    color: #2563eb;
+}
+
+.mobile-login-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+.mobile-login-btn:hover {
+    background: #1d4ed8;
+}

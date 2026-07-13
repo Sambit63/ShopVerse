@@ -12,134 +12,190 @@ import {
 } from "react-icons/fa";
 
 import "./Navbar.css";
-
+import Login from "../../pages/Login/Login";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   return (
-    <header className="navbar">
-      <div className="navbar-container">
+    <>
+      <header className="navbar">
+        <div className="navbar-container">
 
-        {/* Logo */}
-        <Link to="/" className="logo">
-          <span className="logo-main">Shop</span>
-          <span className="logo-accent">Verse</span>
-        </Link>
+          {/* Logo */}
+          <Link to="/" className="logo">
+            <span className="logo-main">Shop</span>
+            <span className="logo-accent">Verse</span>
+          </Link>
 
-        {/* Desktop Search */}
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search products..."
-            className="search-input"
-          />
+          {/* Desktop Search */}
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Search products..."
+              className="search-input"
+            />
 
-          <button className="search-btn">
-            <FaSearch />
-          </button>
-        </div>
-
-        {/* Desktop Navigation */}
-        <nav className="nav-links">
-
-          <div
-            className="category-dropdown"
-            onMouseEnter={() => setCategoryOpen(true)}
-            onMouseLeave={() => setCategoryOpen(false)}
-          >
-            <button className="category-btn">
-              Categories
-              <FaChevronDown className="down-icon" />
+            <button className="search-btn">
+              <FaSearch />
             </button>
-
-            {categoryOpen && (
-              <div className="dropdown-menu">
-                <Link to="/category/electronics">Electronics</Link>
-                <Link to="/category/fashion">Fashion</Link>
-                <Link to="/category/home">Home</Link>
-                <Link to="/category/grocery">Grocery</Link>
-                <Link to="/category/books">Books</Link>
-                <Link to="/category/toys">Toys</Link>
-              </div>
-            )}
           </div>
 
-          <Link to="/ai" className="icon-link ai-link">
-            <FaRobot />
-            <span>AI</span>
-          </Link>
+          {/* Desktop Navigation */}
+          <nav className="nav-links">
 
-          <Link to="/wishlist" className="icon-link">
-            <FaHeart />
-            <span>Wishlist</span>
-          </Link>
+            {/* Categories */}
+            <div
+              className="category-dropdown"
+              onMouseEnter={() => setCategoryOpen(true)}
+              onMouseLeave={() => setCategoryOpen(false)}
+            >
+              <button className="category-btn">
+                Categories
+                <FaChevronDown className="down-icon" />
+              </button>
 
-          <Link to="/cart" className="icon-link cart-link">
-            <FaShoppingCart />
-            <span className="cart-badge">2</span>
-          </Link>
+              {categoryOpen && (
+                <div className="dropdown-menu">
+                  <Link to="/category/electronics">
+                    Electronics
+                  </Link>
 
-          <Link to="/login" className="icon-link">
-            <FaUser />
-            <span>Login</span>
-          </Link>
+                  <Link to="/category/fashion">
+                    Fashion
+                  </Link>
 
-        </nav>
+                  <Link to="/category/home">
+                    Home
+                  </Link>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="menu-btn"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <FaTimes /> : <FaBars />}
-        </button>
-      </div>
+                  <Link to="/category/grocery">
+                    Grocery
+                  </Link>
 
-      {/* Mobile Menu */}
+                  <Link to="/category/books">
+                    Books
+                  </Link>
 
-      <div className={`mobile-menu ${menuOpen ? "active" : ""}`}>
+                  <Link to="/category/toys">
+                    Toys
+                  </Link>
+                </div>
+              )}
+            </div>
 
-        <div className="mobile-search">
+            {/* AI */}
+            <Link to="/ai" className="icon-link ai-link">
+              <FaRobot />
+              <span>AI</span>
+            </Link>
 
-          <input
-            type="text"
-            placeholder="Search..."
-          />
+            {/* Wishlist */}
+            <Link to="/wishlist" className="icon-link">
+              <FaHeart />
+              <span>Wishlist</span>
+            </Link>
 
-          <button>
-            <FaSearch />
+            {/* Cart */}
+            <Link to="/cart" className="icon-link cart-link">
+              <FaShoppingCart />
+              <span className="cart-badge">2</span>
+            </Link>
+
+            {/* Login */}
+            <button
+              className="icon-link login-button"
+              onClick={() => setShowLogin(true)}
+            >
+              <FaUser />
+              <span>Login</span>
+            </button>
+
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="menu-btn"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
 
         </div>
 
-        <Link to="/" onClick={() => setMenuOpen(false)}>
-          Home
-        </Link>
+        {/* Mobile Menu */}
+        <div className={`mobile-menu ${menuOpen ? "active" : ""}`}>
 
-        <Link to="/category" onClick={() => setMenuOpen(false)}>
-          Categories
-        </Link>
+          <div className="mobile-search">
 
-        <Link to="/ai" onClick={() => setMenuOpen(false)}>
-          AI Shopping Assistant
-        </Link>
+            <input
+              type="text"
+              placeholder="Search..."
+            />
 
-        <Link to="/wishlist" onClick={() => setMenuOpen(false)}>
-          Wishlist
-        </Link>
+            <button>
+              <FaSearch />
+            </button>
 
-        <Link to="/cart" onClick={() => setMenuOpen(false)}>
-          Cart
-        </Link>
+          </div>
 
-        <Link to="/login" onClick={() => setMenuOpen(false)}>
-          Login
-        </Link>
+          <Link
+            to="/"
+            onClick={() => setMenuOpen(false)}
+          >
+            Home
+          </Link>
 
-      </div>
+          <Link
+            to="/category"
+            onClick={() => setMenuOpen(false)}
+          >
+            Categories
+          </Link>
 
-    </header>
+          <Link
+            to="/ai"
+            onClick={() => setMenuOpen(false)}
+          >
+            AI Shopping Assistant
+          </Link>
+
+          <Link
+            to="/wishlist"
+            onClick={() => setMenuOpen(false)}
+          >
+            Wishlist
+          </Link>
+
+          <Link
+            to="/cart"
+            onClick={() => setMenuOpen(false)}
+          >
+            Cart
+          </Link>
+
+          {/* Mobile Login */}
+          <button
+            className="mobile-login-btn"
+            onClick={() => {
+              setMenuOpen(false);
+              setShowLogin(true);
+            }}
+          >
+            Login
+          </button>
+
+        </div>
+      </header>
+
+      {/* Login Modal */}
+      {showLogin && (
+        <Login
+          onClose={() => setShowLogin(false)}
+        />
+      )}
+    </>
   );
 };
 

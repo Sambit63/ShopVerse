@@ -1,0 +1,75 @@
+.brand-section{
+
+    padding:90px 0;
+
+    background:#f8fafc;
+
+}
+
+.brand-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:25px;
+
+    margin-top:50px;
+
+}
+
+.brand-card{
+
+    height:120px;
+
+    background:white;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#64748b;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+
+}
+
+.brand-card:hover{
+
+    transform:translateY(-8px);
+
+    color:#2563eb;
+
+    box-shadow:0 18px 35px rgba(37,99,235,.15);
+
+}
+
+@media(max-width:768px){
+
+.brand-section{
+
+    padding:70px 0;
+
+}
+
+.brand-card{
+
+    height:90px;
+
+    font-size:20px;
+
+}
+
+}

@@ -1,0 +1,107 @@
+.trending-products{
+
+    padding:90px 0;
+
+    background:white;
+
+}
+
+.trend-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.trend-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.trend-card img{
+
+    width:100%;
+
+    height:220px;
+
+    object-fit:cover;
+
+}
+
+.trend-card h3{
+
+    padding:20px 20px 10px;
+
+    font-size:20px;
+
+}
+
+.trend-rating{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#f59e0b;
+
+    padding:0 20px;
+
+    margin-bottom:12px;
+
+}
+
+.trend-card h4{
+
+    color:#2563eb;
+
+    padding:0 20px;
+
+    margin-bottom:20px;
+
+}
+
+.trend-card button{
+
+    width:calc(100% - 40px);
+
+    margin:0 20px 20px;
+
+    padding:13px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.trend-card button:hover{
+
+    background:#1d4ed8;
+
+}

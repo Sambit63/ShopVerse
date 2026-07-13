@@ -1,14 +1,17 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/css/bootstrap.min.css'
-import App from './App.jsx'
-import { MapProvider } from './components/MyContexts/MyContexts.jsx';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-createRoot(document.getElementById('root')).render(
+import App from "./App.jsx";
+import { BrowserRouter } from "react-router-dom";
+import AuthProvider from "./context/AuthProvider.jsx";
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <MapProvider>
-      <App />
-    </MapProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
   </StrictMode>,
-)
+);

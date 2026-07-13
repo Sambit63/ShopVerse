@@ -10,5 +10,11 @@ import lombok.Setter;
 public class UserLoginResponse {
 
     private String token;
+    private String message;
+    private String userId;
+    private String name;
+    private String email;
+    private String role;
 
+    // constructors/getters/setters
 }
