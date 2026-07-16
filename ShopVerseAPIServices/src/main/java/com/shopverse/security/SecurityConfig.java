@@ -15,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.shopverse.admin.security.AdminUserDetailsService;
 import com.shopverse.security.filter.JwtAuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.http.HttpMethod;
 
 @Configuration
 @EnableWebSecurity
@@ -56,7 +57,21 @@ public class SecurityConfig {
 
 						.requestMatchers("/api/admin/register", "/api/admin/login", "/user/register", "/user/login")
 						.permitAll()
-
+						
+						// Public Category APIs
+					    .requestMatchers(HttpMethod.GET, "/category/**").permitAll()
+					 // Public Product APIs
+					    .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
+					    
+					    // Admin-only Category APIs
+					    .requestMatchers(HttpMethod.POST, "/category/**").hasRole("ADMIN")
+					    .requestMatchers(HttpMethod.PUT, "/category/**").hasRole("ADMIN")
+					    .requestMatchers(HttpMethod.DELETE, "/category/**").hasRole("ADMIN")
+					 // Admin-only Product APIs
+					    .requestMatchers(HttpMethod.POST, "/product/**").hasRole("ADMIN")
+					    .requestMatchers(HttpMethod.PUT, "/product/**").hasRole("ADMIN")
+					    .requestMatchers(HttpMethod.DELETE, "/product/**").hasRole("ADMIN")
+					    
 						.requestMatchers("/api/admin/**").hasRole("ADMIN")
 
 						.requestMatchers("/user/**").hasRole("USER")

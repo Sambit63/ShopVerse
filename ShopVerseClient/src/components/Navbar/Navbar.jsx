@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useContext } from "react"; // 1. Import useContext
 import { Link } from "react-router-dom";
 import {
   FaSearch,
@@ -13,16 +13,19 @@ import {
 
 import "./Navbar.css";
 import Login from "../../pages/Login/Login";
+import AuthContext from "../../context/AuthContext"; // 2. Import AuthContext
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
+
+  // 3. Consume the global modal triggers from context
+  const { showLogin, setShowLogin } = useContext(AuthContext);
 
   return (
     <>
       <header className="navbar">
         <div className="navbar-container">
-
           {/* Logo */}
           <Link to="/" className="logo">
             <span className="logo-main">Shop</span>
@@ -36,7 +39,6 @@ const Navbar = () => {
               placeholder="Search products..."
               className="search-input"
             />
-
             <button className="search-btn">
               <FaSearch />
             </button>
@@ -44,8 +46,6 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="nav-links">
-
-            {/* Categories */}
             <div
               className="category-dropdown"
               onMouseEnter={() => setCategoryOpen(true)}
@@ -58,52 +58,32 @@ const Navbar = () => {
 
               {categoryOpen && (
                 <div className="dropdown-menu">
-                  <Link to="/category/electronics">
-                    Electronics
-                  </Link>
-
-                  <Link to="/category/fashion">
-                    Fashion
-                  </Link>
-
-                  <Link to="/category/home">
-                    Home
-                  </Link>
-
-                  <Link to="/category/grocery">
-                    Grocery
-                  </Link>
-
-                  <Link to="/category/books">
-                    Books
-                  </Link>
-
-                  <Link to="/category/toys">
-                    Toys
-                  </Link>
+                  <Link to="/category/electronics">Electronics</Link>
+                  <Link to="/category/fashion">Fashion</Link>
+                  <Link to="/category/home">Home</Link>
+                  <Link to="/category/grocery">Grocery</Link>
+                  <Link to="/category/books">Books</Link>
+                  <Link to="/category/toys">Toys</Link>
                 </div>
               )}
             </div>
 
-            {/* AI */}
             <Link to="/ai" className="icon-link ai-link">
               <FaRobot />
               <span>AI</span>
             </Link>
 
-            {/* Wishlist */}
             <Link to="/wishlist" className="icon-link">
               <FaHeart />
               <span>Wishlist</span>
             </Link>
 
-            {/* Cart */}
             <Link to="/cart" className="icon-link cart-link">
               <FaShoppingCart />
               <span className="cart-badge">2</span>
             </Link>
 
-            {/* Login */}
+            {/* Login - Toggles global state now */}
             <button
               className="icon-link login-button"
               onClick={() => setShowLogin(true)}
@@ -111,90 +91,52 @@ const Navbar = () => {
               <FaUser />
               <span>Login</span>
             </button>
-
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="menu-btn"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
+          <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
-
         </div>
 
         {/* Mobile Menu */}
         <div className={`mobile-menu ${menuOpen ? "active" : ""}`}>
-
           <div className="mobile-search">
-
-            <input
-              type="text"
-              placeholder="Search..."
-            />
-
+            <input type="text" placeholder="Search..." />
             <button>
               <FaSearch />
             </button>
-
           </div>
 
-          <Link
-            to="/"
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link to="/" onClick={() => setMenuOpen(false)}>
             Home
           </Link>
-
-          <Link
-            to="/category"
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link to="/category" onClick={() => setMenuOpen(false)}>
             Categories
           </Link>
-
-          <Link
-            to="/ai"
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link to="/ai" onClick={() => setMenuOpen(false)}>
             AI Shopping Assistant
           </Link>
-
-          <Link
-            to="/wishlist"
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link to="/wishlist" onClick={() => setMenuOpen(false)}>
             Wishlist
           </Link>
-
-          <Link
-            to="/cart"
-            onClick={() => setMenuOpen(false)}
-          >
+          <Link to="/cart" onClick={() => setMenuOpen(false)}>
             Cart
           </Link>
 
-          {/* Mobile Login */}
           <button
             className="mobile-login-btn"
             onClick={() => {
               setMenuOpen(false);
-              setShowLogin(true);
+              setShowLogin(true); // Toggles global state
             }}
           >
             Login
           </button>
-
         </div>
       </header>
 
       {/* Login Modal */}
-      {showLogin && (
-        <Login
-          onClose={() => setShowLogin(false)}
-        />
-      )}
+      {showLogin && <Login onClose={() => setShowLogin(false)} />}
     </>
   );
 };

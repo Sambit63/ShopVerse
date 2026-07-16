@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://shopverseclient.onrender.com/ShopVerseAPI";
+// const BASE_URL = "http://localhost:9090/ShopVerseAPI";
+const BASE_URL = "https://shopverse-backend-14ga.onrender.com/ShopVerseAPI/";
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,

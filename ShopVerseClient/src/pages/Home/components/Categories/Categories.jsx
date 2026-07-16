@@ -1,4 +1,8 @@
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Categories.css";
+import UserService from "../../../../services/UserService";
+import AuthContext from "../../../../context/AuthContext";
 
 import {
   FaLaptop,
@@ -9,97 +13,90 @@ import {
   FaFootballBall,
   FaShoppingBasket,
   FaGamepad,
+  FaFolderOpen
 } from "react-icons/fa";
 
-const categories = [
-  {
-    id: 1,
-    name: "Electronics",
-    icon: <FaLaptop />,
-    items: "250+ Products",
-  },
-  {
-    id: 2,
-    name: "Fashion",
-    icon: <FaTshirt />,
-    items: "320+ Products",
-  },
-  {
-    id: 3,
-    name: "Mobiles",
-    icon: <FaMobileAlt />,
-    items: "180+ Products",
-  },
-  {
-    id: 4,
-    name: "Furniture",
-    icon: <FaCouch />,
-    items: "150+ Products",
-  },
-  {
-    id: 5,
-    name: "Books",
-    icon: <FaBook />,
-    items: "420+ Products",
-  },
-  {
-    id: 6,
-    name: "Sports",
-    icon: <FaFootballBall />,
-    items: "170+ Products",
-  },
-  {
-    id: 7,
-    name: "Groceries",
-    icon: <FaShoppingBasket />,
-    items: "600+ Products",
-  },
-  {
-    id: 8,
-    name: "Gaming",
-    icon: <FaGamepad />,
-    items: "110+ Products",
-  },
-];
+// 1. THIS FUNCTION MUST BE DEFINED OUTSIDE THE COMPONENT (AND ABOVE IT)
+const getIconForCategory = (name) => {
+  switch (name?.toLowerCase()) {
+    case "electronics": return <FaLaptop />;
+    case "fashion": return <FaTshirt />;
+    case "mobiles": return <FaMobileAlt />;
+    case "furniture": return <FaCouch />;
+    case "books": return <FaBook />;
+    case "sports": return <FaFootballBall />;
+    case "groceries": return <FaShoppingBasket />;
+    case "gaming": return <FaGamepad />;
+    default: return <FaFolderOpen />;
+  }
+};
 
 const Categories = () => {
+  const [categoriesList, setCategoriesList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  // Consume both auth state and the modal setter from context
+  const { state, setShowLogin } = useContext(AuthContext) || {};
+  const isLoggedIn = state?.isAuthenticated; 
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await UserService.getAllCategories();
+        const fetchedData = response.data.data || response.data; 
+
+        if (Array.isArray(fetchedData)) {
+          setCategoriesList(fetchedData);
+        }
+      } catch (error) {
+        console.error("Failed to fetch categories via UserService:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  const handleCategoryClick = (categorySlug) => {
+    if (isLoggedIn) {
+      // User is logged in: proceed to the products page
+      navigate(`/products/${categorySlug}`);
+    } else {
+      setShowLogin(true);
+    }
+  };
+
+  if (loading) {
+    return <div className="loading">Loading categories...</div>;
+  }
+
   return (
     <section className="categories">
-
       <div className="container">
-
         <div className="section-title">
-
           <h2>Shop by Categories</h2>
-
-          <p>
-            Browse thousands of products across your favorite categories.
-          </p>
-
+          <p>Browse thousands of products across your favorite categories.</p>
         </div>
 
         <div className="category-grid">
-
-          {categories.map((category) => (
-
-            <div className="category-card" key={category.id}>
-
+          {categoriesList.map((category) => (
+            <div 
+              className="category-card" 
+              key={category.id || category.categorySlug}
+              onClick={() => handleCategoryClick(category.categorySlug)}
+            >
               <div className="category-icon">
-                {category.icon}
+                {/* 2. Using the helper function here */}
+                {getIconForCategory(category.categoryName)}
               </div>
-
-              <h3>{category.name}</h3>
-
-              <p>{category.items}</p>
-
+              <h3>{category.categoryName}</h3>
+              <p>{category.description || "Browse items"}</p>
             </div>
-
           ))}
-
         </div>
-
       </div>
-
     </section>
   );
 };

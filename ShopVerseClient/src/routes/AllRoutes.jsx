@@ -2,6 +2,9 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
+// 1. Import your newly created Products page component
+import Products from "../components/ProductCard/Products"; // Make sure this path matches your file structure!
+
 // import Cart from "../pages/Cart/Cart";
 // import Wishlist from "../pages/Wishlist/Wishlist";
 // import Category from "../pages/Category/Category";
@@ -14,10 +17,13 @@ import Login from "../pages/Login/Login";
 const AllRoutes = () => {
   return (
     <Routes>
-
       <Route path="/" element={<Home />} />
 
       <Route path="/login" element={<Login />} />
+
+      {/* 2. Added Route for Category-wise Products Page */}
+      {/* ":categorySlug" will dynamically capture "electronics", "fashion", etc. */}
+      <Route path="/products/:categorySlug" element={<Products />} />
 
       {/* <Route path="/cart" element={<Cart />} /> */}
 
@@ -34,7 +40,6 @@ const AllRoutes = () => {
       <Route path="/orders" element={<Orders />} /> */}
 
       {/* <Route path="*" element={<NotFound />} /> */}
-
     </Routes>
   );
 };
