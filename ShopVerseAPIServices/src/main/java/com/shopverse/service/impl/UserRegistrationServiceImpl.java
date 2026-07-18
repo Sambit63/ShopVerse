@@ -8,6 +8,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.shopverse.dto.CustomResponse;
 import com.shopverse.dto.UserLoginRequest;
 import com.shopverse.dto.UserLoginResponse;
 import com.shopverse.dto.UserRegistrationRequest;
@@ -34,7 +35,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private JwtService jwtService;
 
     @Override
-    public UserRegistration registerUser(UserRegistrationRequest request) {
+    public CustomResponse<UserRegistration> registerUser(UserRegistrationRequest request) {
 
         if (repository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Email already registered.");
@@ -53,8 +54,13 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         user.setCreatedDate(LocalDateTime.now());
 
         user.setUpdatedDate(LocalDateTime.now());
-
-        return repository.save(user);
+        UserRegistration save = repository.save(null);
+        if(save!=null)
+        {
+        	return CustomResponse.success("User Registered Sucessfully", null);
+        }
+        else
+        	return CustomResponse.error("Failed to register user");
     }
     @Override
     public UserLoginResponse login(UserLoginRequest request) {
@@ -77,7 +83,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
                 token,
                 "Login successful",
                 user.getId(),
-                user.getFirstName(),
+                user.getFullName(),
                 user.getEmail(),
                 user.getRole()
         );

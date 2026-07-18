@@ -21,6 +21,6 @@ public class CustomResponse<T> {
 
     // Quick helper for error responses
     public static <T> CustomResponse<T> error(String message) {
-        return new CustomResponse<>("error", message, null);
+        return new CustomResponse<>("failure", message, null);
     }
 }

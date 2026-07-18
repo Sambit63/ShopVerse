@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shopverse.dto.CustomResponse;
 import com.shopverse.dto.UserLoginRequest;
 import com.shopverse.dto.UserLoginResponse;
 import com.shopverse.dto.UserRegistrationRequest;
@@ -23,7 +24,7 @@ public class UserRegistrationController {
     private final UserRegistrationService service;
 
     @PostMapping("/register")
-    public UserRegistration registerUser(@RequestBody UserRegistrationRequest request) {
+    public CustomResponse<UserRegistration> registerUser(@RequestBody UserRegistrationRequest request) {
     	System.out.println("The request data is :"+request.toString());
         return service.registerUser(request);
 

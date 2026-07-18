@@ -2,274 +2,312 @@
    NAVBAR
 =========================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.navbar{
-    width:100%;
-    background:#ffffff;
-    box-shadow:0 2px 12px rgba(0,0,0,.08);
-    position:sticky;
-    top:0;
-    left:0;
-    z-index:1000;
+.navbar {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
-.navbar-container{
-    max-width:1300px;
-    margin:auto;
-    padding:18px 25px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
+.navbar-container {
+  max-width: 1300px;
+  margin: auto;
+  padding: 18px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 /* ===========================
    LOGO
 =========================== */
 
-.logo{
-    text-decoration:none;
-    font-size:32px;
-    font-weight:700;
-    display:flex;
-    align-items:center;
+.logo {
+  text-decoration: none;
+  font-size: 32px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
 }
 
-.logo-main{
-    color:#2563eb;
+.logo-main {
+  color: #2563eb;
 }
 
-.logo-accent{
-    color:#f97316;
+.logo-accent {
+  color: #f97316;
 }
 
 /* ===========================
    SEARCH BAR
 =========================== */
 
-.search-container{
-    flex:1;
-    max-width:500px;
-    display:flex;
-    align-items:center;
-    border:2px solid #e2e8f0;
-    border-radius:12px;
-    overflow:hidden;
-    background:#fff;
+.search-container {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
 }
 
-.search-input{
-    flex:1;
-    border:none;
-    outline:none;
-    padding:14px 18px;
-    font-size:15px;
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 14px 18px;
+  font-size: 15px;
 }
 
-.search-btn{
-    width:55px;
-    border:none;
-    background:#2563eb;
-    color:white;
-    cursor:pointer;
-    font-size:18px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:.3s;
+.search-btn {
+  width: 55px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
 }
 
-.search-btn:hover{
-    background:#1d4ed8;
+.search-btn:hover {
+  background: #1d4ed8;
 }
 
 /* ===========================
    NAV LINKS
 =========================== */
 
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:22px;
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
 }
 
-.icon-link{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    text-decoration:none;
-    color:#334155;
-    font-weight:500;
-    transition:.3s;
-    position:relative;
+.icon-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #334155;
+  font-weight: 500;
+  transition: 0.3s;
+  position: relative;
 }
 
-.icon-link:hover{
-    color:#2563eb;
+.icon-link:hover {
+  color: #2563eb;
 }
 
-.cart-link{
-    position:relative;
+.cart-link {
+  position: relative;
 }
 
-.cart-badge{
-    position:absolute;
-    top:-8px;
-    right:-10px;
-    width:20px;
-    height:20px;
-    border-radius:50%;
-    background:#ef4444;
-    color:white;
-    font-size:11px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ef4444;
+  color: white;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ===========================
    CATEGORY
 =========================== */
 
-.category-dropdown{
-    position:relative;
+.category-dropdown {
+  position: relative;
 }
 
-.category-btn{
-    border:none;
-    background:none;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    cursor:pointer;
-    font-size:15px;
-    color:#334155;
-    font-weight:500;
+.category-btn {
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #334155;
+  font-weight: 500;
 }
 
-.category-btn:hover{
-    color:#2563eb;
+.category-btn:hover {
+  color: #2563eb;
 }
 
-.down-icon{
-    font-size:12px;
+.down-icon {
+  font-size: 12px;
 }
 
-.dropdown-menu{
-    position:absolute;
-    top:42px;
-    left:0;
-    width:220px;
-    background:white;
-    border-radius:12px;
-    box-shadow:0 12px 30px rgba(0,0,0,.15);
-    overflow:hidden;
+.dropdown-menu {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  width: 220px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 }
 
-.dropdown-menu a{
-    display:block;
-    padding:14px 18px;
-    text-decoration:none;
-    color:#334155;
-    transition:.3s;
+.dropdown-menu a {
+  display: block;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: #334155;
+  transition: 0.3s;
 }
 
-.dropdown-menu a:hover{
-    background:#2563eb;
-    color:white;
+.dropdown-menu a:hover {
+  background: #2563eb;
+  color: white;
 }
 
 /* ===========================
    MOBILE BUTTON
 =========================== */
 
-.menu-btn{
-    display:none;
-    border:none;
-    background:none;
-    cursor:pointer;
-    font-size:26px;
+.menu-btn {
+  display: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 26px;
 }
 
 /* ===========================
    MOBILE MENU
 =========================== */
 
-.mobile-menu{
-    display:none;
-    flex-direction:column;
-    background:white;
-    padding:20px;
-    border-top:1px solid #eee;
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: white;
+  padding: 20px;
+  border-top: 1px solid #eee;
 }
 
-.mobile-menu.active{
-    display:flex;
+.mobile-menu.active {
+  display: flex;
 }
 
-.mobile-menu a{
-    text-decoration:none;
-    color:#334155;
-    padding:14px 0;
-    border-bottom:1px solid #f1f5f9;
+.mobile-menu a {
+  text-decoration: none;
+  color: #334155;
+  padding: 14px 0;
+  border-bottom: 1px solid #f1f5f9;
 }
 
-.mobile-search{
-    display:flex;
-    margin-bottom:20px;
-    border:2px solid #e2e8f0;
-    border-radius:10px;
-    overflow:hidden;
+.mobile-search {
+  display: flex;
+  margin-bottom: 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.mobile-search input{
-    flex:1;
-    border:none;
-    outline:none;
-    padding:12px;
+.mobile-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px;
 }
 
-.mobile-search button{
-    width:50px;
-    border:none;
-    background:#2563eb;
-    color:white;
-    cursor:pointer;
+.mobile-search button {
+  width: 50px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
 }
 
 /* ===========================
    RESPONSIVE
 =========================== */
 
-@media(max-width:992px){
+@media (max-width: 992px) {
+  .search-container {
+    display: none;
+  }
 
-.search-container{
-    display:none;
+  .nav-links {
+    display: none;
+  }
+
+  .menu-btn {
+    display: block;
+  }
 }
 
-.nav-links{
-    display:none;
+@media (max-width: 576px) {
+  .logo {
+    font-size: 26px;
+  }
+
+  .navbar-container {
+    padding: 16px;
+  }
+}
+/* ===========================
+   NAVBAR LOGIN BUTTONS 
+=========================== */
+
+/* Desktop Login Button Reset & Alignment */
+.login-button {
+    background: transparent;
+    border: none;
+    color: #334155; /* Match other nav links */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;       /* Match standard icon-link gap */
+    font-size: 15px; /* Match standard category button font size */
+    font-weight: 500;
+    font-family: inherit;
+    padding: 0;
+    transition: 0.3s;
 }
 
-.menu-btn{
-    display:block;
+.login-button:hover {
+    color: #2563eb;
 }
 
+/* Mobile Login Button Styling */
+.mobile-login-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 14px;  /* Match standard mobile nav spacing */
+    margin-top: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
 }
 
-@media(max-width:576px){
-
-.logo{
-    font-size:26px;
-}
-
-.navbar-container{
-    padding:16px;
-}
-
+.mobile-login-btn:hover {
+    background: #1d4ed8;
 }
