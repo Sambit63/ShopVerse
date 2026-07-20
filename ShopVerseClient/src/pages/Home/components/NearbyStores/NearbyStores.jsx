@@ -25,7 +25,7 @@ const stores = [
     rating: "4.7",
     distance: "18 km",
     lat: 12.994675536323266,
-    lon:77.70082042445455,
+    lon: 77.70082042445455,
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const stores = [
     rating: "4.9",
     distance: "52 km",
     lat: 12.973154440345962,
-    lon:  77.60707191922675,
+    lon: 77.60707191922675,
   },
 ];
 
@@ -74,9 +74,8 @@ const NearbyStores = () => {
                 <button
                   className="direction-btn"
                   onClick={() =>
-                    window.open(
-                      `/map?lat=${store.lat}&lon=${store.lon}&name=${store.name}`,
-                      "_blank",
+                    navigate(
+                      `/map?lat=${store.lat}&lon=${store.lon}&name=${encodeURIComponent(store.name)}`,
                     )
                   }
                 >
