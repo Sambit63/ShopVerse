@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 // 1. Import your newly created Products page component
 import Products from "../components/ProductCard/Products"; // Make sure this path matches your file structure!
+import Map from "../pages/Home/components/Map/Map";
 
 // import Cart from "../pages/Cart/Cart";
 // import Wishlist from "../pages/Wishlist/Wishlist";
@@ -24,6 +25,7 @@ const AllRoutes = () => {
       {/* 2. Added Route for Category-wise Products Page */}
       {/* ":categorySlug" will dynamically capture "electronics", "fashion", etc. */}
       <Route path="/products/:categorySlug" element={<Products />} />
+      <Route path="/map" element={<Map />} />
 
       {/* <Route path="/cart" element={<Cart />} /> */}
 
