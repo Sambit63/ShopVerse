@@ -10,15 +10,20 @@ import NearbyStores from "./components/NearbyStores/NearbyStores";
 import Reviews from "./components/Reviews/Reviews";
 import Newsletter from "./components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
+import { useRef } from "react";
 
 const Home = () => {
+  const categoriesRef = useRef(null);
+
   return (
     <>
       <Navbar />
 
-      <Hero />
+      <Hero categoriesRef={categoriesRef} />
 
-      <Categories />
+      <div ref={categoriesRef}>
+        <Categories />
+      </div>
 
       <FeaturedProducts />
 

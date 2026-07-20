@@ -54,7 +54,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         user.setCreatedDate(LocalDateTime.now());
 
         user.setUpdatedDate(LocalDateTime.now());
-        UserRegistration save = repository.save(null);
+        UserRegistration save = repository.save(user);
         if(save!=null)
         {
         	return CustomResponse.success("User Registered Sucessfully", null);

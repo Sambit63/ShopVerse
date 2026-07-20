@@ -9,13 +9,9 @@ import lombok.ToString;
 @ToString
 public class UserRegistrationRequest {
 
-    private String firstName;
-
-    private String lastName;
+    private String fullName;
 
     private String email;
-
-    private String mobileNumber;
 
     private String password;
 

@@ -52,19 +52,20 @@ const Login = ({ onClose }) => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
     try {
-      console.log("Registering user:", { name, email, password });
       const response = await toast.promise(
         UserService.register({ name, email, password }),
         {
-          loading: "Creating account ...",
-          success: "Account Created Sucessfully 👋",
-          error: (err) => err.response?.data?.message || "Account Creating failed",
-        },
+          loading: "Creating account...",
+          success: (res) => res.data.message,
+          error: (err) =>
+            err.response?.data?.message || "Account creation failed",
+        },x
       );
       setIsLogin(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

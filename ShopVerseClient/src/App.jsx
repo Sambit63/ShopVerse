@@ -1,15 +1,20 @@
-import { useState } from 'react'
+import { useState } from "react";
 // import './App.css'
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 import AllRoutes from "./routes/AllRoutes";
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-    <Toaster
+      <Toaster
         position="top-right"
         reverseOrder={false}
+        containerStyle={{
+          top: 20,
+          right: 20,
+          zIndex: 999999,
+        }}
         toastOptions={{
           duration: 3000,
           style: {
@@ -21,9 +26,9 @@ function App() {
           },
         }}
       />
-      <AllRoutes/>
+      <AllRoutes />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
