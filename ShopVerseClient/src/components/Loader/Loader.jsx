@@ -42,7 +42,7 @@ const Loader = () => {
               <span className="brand-shop">Shop</span>
               <span className="brand-verse">Verse</span>
             </h4>
-            <p className="loader-caption">Syncing with server...</p>
+            <p className="loader-caption">Loading ...</p>
           </div>
         </div>
       </div>
