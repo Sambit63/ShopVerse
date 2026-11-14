@@ -1,0 +1,243 @@
+/* ===================================================
+   MOBILE-FIRST HORIZONTAL CATEGORY CHIPS
+   =================================================== */
+
+.category-chips-section {
+  width: 100%;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-main);
+  padding: 14px 0 12px 0;
+  position: relative;
+  z-index: 90;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.category-chips-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Horizontal Scroll Track */
+.chips-scroll-track {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 4px 6px 4px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE/Edge */
+}
+
+.chips-scroll-track::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Individual Category Chip Item */
+.category-chip-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  min-width: 68px;
+  flex-shrink: 0;
+  text-decoration: none;
+  font-family: inherit;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  outline: none;
+}
+
+.category-chip-item:hover {
+  transform: translateY(-3px);
+}
+
+.category-chip-item:active {
+  transform: scale(0.92);
+}
+
+/* Circular Icon Bubble */
+.chip-bubble {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 7px;
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--border-main);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.category-chip-item:hover .chip-bubble {
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.22);
+  transform: scale(1.06);
+}
+
+/* Category Label */
+.chip-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: -0.2px;
+  transition: color 0.2s ease;
+}
+
+.category-chip-item:hover .chip-label {
+  color: var(--color-primary);
+}
+
+[data-theme="dark"] .chip-label,
+.dark .chip-label {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .category-chip-item:hover .chip-label,
+.dark .category-chip-item:hover .chip-label {
+  color: #60a5fa !important;
+}
+
+/* ===================================================
+   VIBRANT THEME COLORWAYS (LIGHT & DARK MODES)
+   =================================================== */
+
+.theme-blue {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  color: #2563eb;
+  border-color: #bfdbfe;
+}
+
+.theme-purple {
+  background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+  color: #9333ea;
+  border-color: #e9d5ff;
+}
+
+.theme-amber {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  color: #d97706;
+  border-color: #fde68a;
+}
+
+.theme-emerald {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  color: #059669;
+  border-color: #a7f3d0;
+}
+
+.theme-rose {
+  background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+  color: #e11d48;
+  border-color: #fecdd3;
+}
+
+.theme-green {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  color: #16a34a;
+  border-color: #bbf7d0;
+}
+
+.theme-indigo {
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+  color: #4f46e5;
+  border-color: #c7d2fe;
+}
+
+.theme-cyan {
+  background: linear-gradient(135deg, #ecfeff, #cffafe);
+  color: #0891b2;
+  border-color: #a5f3fc;
+}
+
+/* Dark Mode Glow Effects for Category Bubbles */
+[data-theme="dark"] .theme-blue,
+.dark .theme-blue {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(30, 58, 138, 0.4));
+  color: #60a5fa;
+  border-color: rgba(96, 165, 250, 0.4);
+}
+
+[data-theme="dark"] .theme-purple,
+.dark .theme-purple {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.25), rgba(88, 28, 135, 0.4));
+  color: #c084fc;
+  border-color: rgba(192, 132, 252, 0.4);
+}
+
+[data-theme="dark"] .theme-amber,
+.dark .theme-amber {
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.25), rgba(120, 53, 15, 0.4));
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.4);
+}
+
+[data-theme="dark"] .theme-emerald,
+.dark .theme-emerald {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.25), rgba(6, 78, 59, 0.4));
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.4);
+}
+
+[data-theme="dark"] .theme-rose,
+.dark .theme-rose {
+  background: linear-gradient(135deg, rgba(225, 29, 72, 0.25), rgba(136, 19, 55, 0.4));
+  color: #fb7185;
+  border-color: rgba(251, 113, 133, 0.4);
+}
+
+[data-theme="dark"] .theme-green,
+.dark .theme-green {
+  background: linear-gradient(135deg, rgba(22, 163, 74, 0.25), rgba(20, 83, 45, 0.4));
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+[data-theme="dark"] .theme-indigo,
+.dark .theme-indigo {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.25), rgba(49, 46, 129, 0.4));
+  color: #818cf8;
+  border-color: rgba(129, 140, 248, 0.4);
+}
+
+[data-theme="dark"] .theme-cyan,
+.dark .theme-cyan {
+  background: linear-gradient(135deg, rgba(8, 145, 178, 0.25), rgba(22, 78, 99, 0.4));
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+/* ===================================================
+   RESPONSIVE ADJUSTMENTS
+   =================================================== */
+
+@media (max-width: 576px) {
+  .category-chips-section {
+    padding: 10px 0 8px 0;
+  }
+
+  .chips-scroll-track {
+    gap: 14px;
+    padding: 2px 2px 4px 2px;
+  }
+
+  .chip-bubble {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .chip-label {
+    font-size: 11px;
+  }
+}

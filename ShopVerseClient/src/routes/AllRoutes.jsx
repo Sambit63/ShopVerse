@@ -22,9 +22,9 @@ const AllRoutes = () => {
 
       <Route path="/login" element={<Login />} />
 
-      {/* 2. Added Route for Category-wise Products Page */}
-      {/* ":categorySlug" will dynamically capture "electronics", "fashion", etc. */}
+      {/* Category-wise Products Page */}
       <Route path="/products/:categorySlug" element={<Products />} />
+      <Route path="/category/:categorySlug" element={<Products />} />
       <Route path="/map" element={<Map />} />
 
       {/* <Route path="/cart" element={<Cart />} /> */}

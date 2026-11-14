@@ -2,11 +2,14 @@ import { useState } from "react";
 // import './App.css'
 import { Toaster } from "react-hot-toast";
 import AllRoutes from "./routes/AllRoutes";
+import Loader from "./components/Loader/Loader";
+
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
+      <Loader />
       <Toaster
         position="top-right"
         reverseOrder={false}

@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar/Navbar";
+import CategoryChips from "./components/CategoryChips/CategoryChips";
 import Hero from "./components/Hero/Hero";
 import Categories from "./components/Categories/Categories";
 import FeaturedProducts from "./components/FeaturedProducts/FeaturedProducts";
@@ -18,6 +19,8 @@ const Home = () => {
   return (
     <>
       <Navbar />
+
+      <CategoryChips />
 
       <Hero categoriesRef={categoriesRef} />
 
